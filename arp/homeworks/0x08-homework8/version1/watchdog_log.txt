@@ -1,0 +1,447 @@
+[Fri Nov 15 00:28:29 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:28:32 2024] Italy PID received and set.
+[Fri Nov 15 00:29:39 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:29:42 2024] Italy PID received and set.
+[Fri Nov 15 00:33:47 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:34:04 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:34:13 2024] Egypt PID received and set.
+[Fri Nov 15 00:41:43 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:41:46 2024] Italy PID received and set.
+[Fri Nov 15 00:44:38 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:44:41 2024] Italy PID received and set.
+[Fri Nov 15 00:48:49 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:48:55 2024] Italy PID received and set.
+[Fri Nov 15 00:49:57 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:52:03 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:52:06 2024] Egypt PID received and set.
+[Fri Nov 15 00:55:34 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 00:55:44 2024] Egypt PID received and set.
+[Fri Nov 15 01:04:20 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:04:25 2024] Italy PID received and set.
+[Fri Nov 15 01:09:35 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:11:57 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:14:19 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:17:10 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:17:15 2024] Italy PID received and set.
+[Fri Nov 15 01:18:21 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:18:42 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:18:46 2024] Italy PID received and set.
+[Fri Nov 15 01:24:21 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:24:24 2024] Italy PID received and set.
+[Fri Nov 15 01:28:12 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:28:14 2024] Italy PID received and set.
+[Fri Nov 15 01:29:18 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:29:22 2024] Italy PID received and set.
+[Fri Nov 15 01:33:06 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 01:33:09 2024] Italy PID received and set.
+[Fri Nov 15 01:33:14 2024] Timeout detected in Egypt. Terminating tasks.
+[Fri Nov 15 02:02:54 2024] Watchdog started and waiting for PIDs...
+[Fri Nov 15 02:03:05 2024] Italy PID received and set.
+[Fri Nov 15 02:03:11 2024] Egypt PID received and set.
+[Fri Nov 15 02:03:19 2024] Japan PID received and set.
+[Fri Nov 15 02:03:19 2024] All PIDs received. Starting monitoring loop...
+[Fri Nov 15 02:03:19 2024] Received from Egypt: 
+[Fri Nov 15 02:03:19 2024] 03:03:11
+03:03:12
+0
+[Fri Nov 15 02:03:19 2024] Received from Italy: 
+[Fri Nov 15 02:03:19 2024] 03:03:05
+03:03:06
+0
+[Fri Nov 15 02:03:20 2024] Received from Egypt: 
+[Fri Nov 15 02:03:20 2024] 3:03:13
+03:03:14
+03
+[Fri Nov 15 02:03:20 2024] Received from Italy: 
+[Fri Nov 15 02:03:20 2024] 3:03:07
+03:03:08
+03
+[Fri Nov 15 02:03:20 2024] Received from Japan: 
+[Fri Nov 15 02:03:20 2024] 03:03:19
+
+[Fri Nov 15 02:03:21 2024] Received from Egypt: 
+[Fri Nov 15 02:03:21 2024] :03:15
+03:03:16
+03:
+[Fri Nov 15 02:03:21 2024] Received from Italy: 
+[Fri Nov 15 02:03:21 2024] :03:09
+03:03:10
+03:
+[Fri Nov 15 02:03:21 2024] Received from Japan: 
+[Fri Nov 15 02:03:21 2024] 03:03:20
+
+[Fri Nov 15 02:03:22 2024] Received from Egypt: 
+[Fri Nov 15 02:03:22 2024] 03:17
+03:03:18
+03:0
+[Fri Nov 15 02:03:22 2024] Received from Italy: 
+[Fri Nov 15 02:03:22 2024] 03:11
+03:03:12
+03:0
+[Fri Nov 15 02:03:22 2024] Received from Japan: 
+[Fri Nov 15 02:03:22 2024] 03:03:21
+
+[Fri Nov 15 02:03:23 2024] Received from Egypt: 
+[Fri Nov 15 02:03:23 2024] 3:19
+03:03:20
+03:03
+[Fri Nov 15 02:03:23 2024] Received from Italy: 
+[Fri Nov 15 02:03:23 2024] 3:13
+03:03:14
+03:03
+[Fri Nov 15 02:03:23 2024] Received from Japan: 
+[Fri Nov 15 02:03:23 2024] 03:03:22
+
+[Fri Nov 15 02:03:24 2024] Received from Egypt: 
+[Fri Nov 15 02:03:24 2024] :21
+03:03:22
+03:03:
+[Fri Nov 15 02:03:24 2024] Received from Italy: 
+[Fri Nov 15 02:03:24 2024] :15
+03:03:16
+03:03:
+[Fri Nov 15 02:03:24 2024] Received from Japan: 
+[Fri Nov 15 02:03:24 2024] 03:03:23
+
+[Fri Nov 15 02:03:25 2024] Received from Egypt: 
+[Fri Nov 15 02:03:25 2024] 23
+03:03:24
+03:03:2
+[Fri Nov 15 02:03:25 2024] Received from Italy: 
+[Fri Nov 15 02:03:25 2024] 17
+03:03:19
+03:03:2
+[Fri Nov 15 02:03:25 2024] Received from Japan: 
+[Fri Nov 15 02:03:25 2024] 03:03:24
+
+[Fri Nov 15 02:03:26 2024] Received from Egypt: 
+[Fri Nov 15 02:03:26 2024] 5
+03:03:26
+
+[Fri Nov 15 02:03:26 2024] Received from Italy: 
+[Fri Nov 15 02:03:26 2024] 0
+03:03:21
+03:03:22
+[Fri Nov 15 02:03:26 2024] Received from Japan: 
+[Fri Nov 15 02:03:26 2024] 03:03:25
+
+[Fri Nov 15 02:03:27 2024] Received from Egypt: 
+[Fri Nov 15 02:03:27 2024] 03:03:27
+
+[Fri Nov 15 02:03:27 2024] Received from Italy: 
+[Fri Nov 15 02:03:27 2024] 
+03:03:23
+03:03:24
+
+[Fri Nov 15 02:03:27 2024] Received from Japan: 
+[Fri Nov 15 02:03:27 2024] 03:03:26
+
+[Fri Nov 15 02:03:28 2024] Received from Egypt: 
+[Fri Nov 15 02:03:28 2024] 03:03:28
+
+[Fri Nov 15 02:03:28 2024] Received from Italy: 
+[Fri Nov 15 02:03:28 2024] 03:03:25
+03:03:26
+0
+[Fri Nov 15 02:03:28 2024] Received from Japan: 
+[Fri Nov 15 02:03:28 2024] 03:03:27
+
+[Fri Nov 15 02:03:29 2024] Received from Egypt: 
+[Fri Nov 15 02:03:29 2024] 03:03:29
+
+[Fri Nov 15 02:03:29 2024] Received from Italy: 
+[Fri Nov 15 02:03:29 2024] 3:03:27
+03:03:28
+03
+[Fri Nov 15 02:03:29 2024] Received from Japan: 
+[Fri Nov 15 02:03:29 2024] 03:03:28
+
+[Fri Nov 15 02:03:30 2024] Received from Egypt: 
+[Fri Nov 15 02:03:30 2024] 03:03:30
+
+[Fri Nov 15 02:03:30 2024] Received from Italy: 
+[Fri Nov 15 02:03:30 2024] :03:29
+03:03:30
+
+[Fri Nov 15 02:03:30 2024] Received from Japan: 
+[Fri Nov 15 02:03:30 2024] 03:03:29
+03:03:30
+
+[Fri Nov 15 02:03:31 2024] Received from Egypt: 
+[Fri Nov 15 02:03:31 2024] 03:03:31
+
+[Fri Nov 15 02:03:31 2024] Received from Italy: 
+[Fri Nov 15 02:03:31 2024] 03:03:31
+
+[Fri Nov 15 02:03:31 2024] Received from Japan: 
+[Fri Nov 15 02:03:31 2024] 03:03:31
+
+[Fri Nov 15 02:03:32 2024] Received from Egypt: 
+[Fri Nov 15 02:03:32 2024] 03:03:32
+
+[Fri Nov 15 02:03:32 2024] Received from Italy: 
+[Fri Nov 15 02:03:32 2024] 03:03:32
+
+[Fri Nov 15 02:03:32 2024] Received from Japan: 
+[Fri Nov 15 02:03:32 2024] 03:03:32
+
+[Fri Nov 15 02:03:33 2024] Received from Egypt: 
+[Fri Nov 15 02:03:33 2024] 03:03:33
+
+[Fri Nov 15 02:03:33 2024] Received from Italy: 
+[Fri Nov 15 02:03:33 2024] 03:03:33
+
+[Fri Nov 15 02:03:33 2024] Received from Japan: 
+[Fri Nov 15 02:03:33 2024] 03:03:33
+
+[Fri Nov 15 02:03:34 2024] Received from Egypt: 
+[Fri Nov 15 02:03:34 2024] 03:03:34
+
+[Fri Nov 15 02:03:34 2024] Received from Italy: 
+[Fri Nov 15 02:03:34 2024] 03:03:34
+
+[Fri Nov 15 02:03:34 2024] Received from Japan: 
+[Fri Nov 15 02:03:34 2024] 03:03:34
+
+[Fri Nov 15 02:03:35 2024] Received from Egypt: 
+[Fri Nov 15 02:03:35 2024] 03:03:35
+
+[Fri Nov 15 02:03:35 2024] Received from Italy: 
+[Fri Nov 15 02:03:35 2024] 03:03:35
+
+[Fri Nov 15 02:03:35 2024] Received from Japan: 
+[Fri Nov 15 02:03:35 2024] 03:03:35
+
+[Fri Nov 15 02:03:36 2024] Received from Egypt: 
+[Fri Nov 15 02:03:36 2024] 03:03:36
+
+[Fri Nov 15 02:03:36 2024] Received from Italy: 
+[Fri Nov 15 02:03:36 2024] 03:03:36
+
+[Fri Nov 15 02:03:36 2024] Received from Japan: 
+[Fri Nov 15 02:03:36 2024] 03:03:36
+
+[Fri Nov 15 02:03:37 2024] Received from Egypt: 
+[Fri Nov 15 02:03:37 2024] 03:03:37
+
+[Fri Nov 15 02:03:37 2024] Received from Italy: 
+[Fri Nov 15 02:03:37 2024] 03:03:37
+
+[Fri Nov 15 02:03:38 2024] Received from Egypt: 
+[Fri Nov 15 02:03:38 2024] 03:03:38
+
+[Fri Nov 15 02:03:38 2024] Received from Italy: 
+[Fri Nov 15 02:03:38 2024] 03:03:38
+
+[Fri Nov 15 02:03:38 2024] Received from Japan: 
+[Fri Nov 15 02:03:38 2024] 03:03:37
+
+[Fri Nov 15 02:03:39 2024] Received from Egypt: 
+[Fri Nov 15 02:03:39 2024] 03:03:39
+
+[Fri Nov 15 02:03:39 2024] Received from Italy: 
+[Fri Nov 15 02:03:39 2024] 03:03:39
+
+[Fri Nov 15 02:03:39 2024] Received from Japan: 
+[Fri Nov 15 02:03:39 2024] 03:03:38
+
+[Fri Nov 15 02:03:40 2024] Received from Egypt: 
+[Fri Nov 15 02:03:40 2024] 03:03:40
+
+[Fri Nov 15 02:03:40 2024] Received from Italy: 
+[Fri Nov 15 02:03:40 2024] 03:03:40
+
+[Fri Nov 15 02:03:40 2024] Received from Japan: 
+[Fri Nov 15 02:03:40 2024] 03:03:39
+
+[Fri Nov 15 02:03:41 2024] Received from Egypt: 
+[Fri Nov 15 02:03:41 2024] 03:03:41
+
+[Fri Nov 15 02:03:41 2024] Received from Italy: 
+[Fri Nov 15 02:03:41 2024] 03:03:41
+
+[Fri Nov 15 02:03:41 2024] Received from Japan: 
+[Fri Nov 15 02:03:41 2024] 03:03:40
+03:03:41
+
+[Fri Nov 15 02:03:42 2024] Received from Egypt: 
+[Fri Nov 15 02:03:42 2024] 03:03:42
+
+[Fri Nov 15 02:03:42 2024] Received from Italy: 
+[Fri Nov 15 02:03:42 2024] 03:03:42
+
+[Fri Nov 15 02:03:42 2024] Received from Japan: 
+[Fri Nov 15 02:03:42 2024] 03:03:42
+
+[Fri Nov 15 02:03:43 2024] Received from Egypt: 
+[Fri Nov 15 02:03:43 2024] 03:03:43
+
+[Fri Nov 15 02:03:43 2024] Received from Italy: 
+[Fri Nov 15 02:03:43 2024] 03:03:43
+
+[Fri Nov 15 02:03:43 2024] Received from Japan: 
+[Fri Nov 15 02:03:43 2024] 03:03:43
+
+[Fri Nov 15 02:03:44 2024] Received from Egypt: 
+[Fri Nov 15 02:03:44 2024] 03:03:44
+
+[Fri Nov 15 02:03:44 2024] Received from Italy: 
+[Fri Nov 15 02:03:44 2024] 03:03:44
+
+[Fri Nov 15 02:03:44 2024] Received from Japan: 
+[Fri Nov 15 02:03:44 2024] 03:03:44
+
+[Fri Nov 15 02:03:45 2024] Received from Egypt: 
+[Fri Nov 15 02:03:45 2024] 03:03:45
+
+[Fri Nov 15 02:03:45 2024] Received from Italy: 
+[Fri Nov 15 02:03:45 2024] 03:03:45
+
+[Fri Nov 15 02:03:45 2024] Received from Japan: 
+[Fri Nov 15 02:03:45 2024] 03:03:45
+
+[Fri Nov 15 02:03:46 2024] Received from Egypt: 
+[Fri Nov 15 02:03:46 2024] 03:03:46
+
+[Fri Nov 15 02:03:46 2024] Received from Italy: 
+[Fri Nov 15 02:03:46 2024] 03:03:46
+
+[Fri Nov 15 02:03:46 2024] Received from Japan: 
+[Fri Nov 15 02:03:46 2024] 03:03:46
+
+[Fri Nov 15 02:03:47 2024] Received from Egypt: 
+[Fri Nov 15 02:03:47 2024] 03:03:47
+
+[Fri Nov 15 02:03:47 2024] Received from Italy: 
+[Fri Nov 15 02:03:47 2024] 03:03:47
+
+[Fri Nov 15 02:03:47 2024] Received from Japan: 
+[Fri Nov 15 02:03:47 2024] 03:03:47
+
+[Fri Nov 15 02:03:48 2024] Received from Egypt: 
+[Fri Nov 15 02:03:48 2024] 03:03:48
+
+[Fri Nov 15 02:03:48 2024] Received from Italy: 
+[Fri Nov 15 02:03:48 2024] 03:03:48
+
+[Fri Nov 15 02:03:48 2024] Received from Japan: 
+[Fri Nov 15 02:03:48 2024] 03:03:48
+
+[Fri Nov 15 02:03:49 2024] Received from Egypt: 
+[Fri Nov 15 02:03:49 2024] 03:03:49
+
+[Fri Nov 15 02:03:49 2024] Received from Italy: 
+[Fri Nov 15 02:03:49 2024] 03:03:49
+
+[Fri Nov 15 02:03:49 2024] Received from Japan: 
+[Fri Nov 15 02:03:49 2024] 03:03:49
+
+[Fri Nov 15 02:03:50 2024] Received from Egypt: 
+[Fri Nov 15 02:03:50 2024] 03:03:50
+
+[Fri Nov 15 02:03:50 2024] Received from Italy: 
+[Fri Nov 15 02:03:50 2024] 03:03:50
+
+[Fri Nov 15 02:03:50 2024] Received from Japan: 
+[Fri Nov 15 02:03:50 2024] 03:03:50
+
+[Fri Nov 15 02:03:51 2024] Received from Egypt: 
+[Fri Nov 15 02:03:51 2024] 03:03:51
+
+[Fri Nov 15 02:03:51 2024] Received from Italy: 
+[Fri Nov 15 02:03:51 2024] 03:03:51
+
+[Fri Nov 15 02:03:51 2024] Received from Japan: 
+[Fri Nov 15 02:03:51 2024] 03:03:51
+
+[Fri Nov 15 02:03:52 2024] Received from Egypt: 
+[Fri Nov 15 02:03:52 2024] 03:03:52
+
+[Fri Nov 15 02:03:52 2024] Received from Italy: 
+[Fri Nov 15 02:03:52 2024] 03:03:52
+
+[Fri Nov 15 02:03:52 2024] Received from Japan: 
+[Fri Nov 15 02:03:52 2024] 03:03:52
+
+[Fri Nov 15 02:03:53 2024] Received from Egypt: 
+[Fri Nov 15 02:03:53 2024] 03:03:53
+
+[Fri Nov 15 02:03:53 2024] Received from Italy: 
+[Fri Nov 15 02:03:53 2024] 03:03:53
+
+[Fri Nov 15 02:03:53 2024] Received from Japan: 
+[Fri Nov 15 02:03:53 2024] 03:03:53
+
+[Fri Nov 15 02:03:54 2024] Received from Egypt: 
+[Fri Nov 15 02:03:54 2024] 03:03:54
+
+[Fri Nov 15 02:03:54 2024] Received from Italy: 
+[Fri Nov 15 02:03:54 2024] 03:03:54
+
+[Fri Nov 15 02:03:54 2024] Received from Japan: 
+[Fri Nov 15 02:03:54 2024] 03:03:54
+
+[Fri Nov 15 02:03:55 2024] Received from Egypt: 
+[Fri Nov 15 02:03:55 2024] 03:03:55
+
+[Fri Nov 15 02:03:55 2024] Received from Italy: 
+[Fri Nov 15 02:03:55 2024] 03:03:55
+
+[Fri Nov 15 02:03:55 2024] Received from Japan: 
+[Fri Nov 15 02:03:55 2024] 03:03:55
+
+[Fri Nov 15 02:03:56 2024] Received from Egypt: 
+[Fri Nov 15 02:03:56 2024] 03:03:56
+
+[Fri Nov 15 02:03:56 2024] Received from Italy: 
+[Fri Nov 15 02:03:56 2024] 03:03:56
+
+[Fri Nov 15 02:03:56 2024] Received from Japan: 
+[Fri Nov 15 02:03:56 2024] 03:03:56
+
+[Fri Nov 15 02:03:57 2024] Received from Egypt: 
+[Fri Nov 15 02:03:57 2024] 03:03:57
+
+[Fri Nov 15 02:03:57 2024] Received from Italy: 
+[Fri Nov 15 02:03:57 2024] 03:03:57
+
+[Fri Nov 15 02:03:57 2024] Received from Japan: 
+[Fri Nov 15 02:03:57 2024] 03:03:57
+
+[Fri Nov 15 02:03:58 2024] Received from Italy: 
+[Fri Nov 15 02:03:58 2024] 03:03:58
+
+[Fri Nov 15 02:03:58 2024] Received from Japan: 
+[Fri Nov 15 02:03:58 2024] 03:03:58
+
+[Fri Nov 15 02:03:59 2024] Received from Italy: 
+[Fri Nov 15 02:03:59 2024] 03:03:59
+
+[Fri Nov 15 02:03:59 2024] Received from Japan: 
+[Fri Nov 15 02:03:59 2024] 03:03:59
+
+[Fri Nov 15 02:04:00 2024] Received from Italy: 
+[Fri Nov 15 02:04:00 2024] 03:04:00
+
+[Fri Nov 15 02:04:00 2024] Received from Japan: 
+[Fri Nov 15 02:04:00 2024] 03:04:00
+
+[Fri Nov 15 02:04:01 2024] Received from Italy: 
+[Fri Nov 15 02:04:01 2024] 03:04:01
+
+[Fri Nov 15 02:04:01 2024] Received from Japan: 
+[Fri Nov 15 02:04:01 2024] 03:04:01
+
+[Fri Nov 15 02:04:02 2024] Received from Italy: 
+[Fri Nov 15 02:04:02 2024] 03:04:02
+
+[Fri Nov 15 02:04:02 2024] Received from Japan: 
+[Fri Nov 15 02:04:02 2024] 03:04:02
+
+[Fri Nov 15 02:04:03 2024] Received from Italy: 
+[Fri Nov 15 02:04:03 2024] 03:04:03
+
+[Fri Nov 15 02:04:03 2024] Received from Japan: 
+[Fri Nov 15 02:04:03 2024] 03:04:03
+
+[Fri Nov 15 02:04:03 2024] Timeout detected in Egypt. Terminating tasks.
