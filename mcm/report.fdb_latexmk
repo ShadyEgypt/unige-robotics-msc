@@ -1,0 +1,15 @@
+# Fdb version 4
+["pdflatex"] 1730410187.28846 "/home/shady/Documents/unige/mcm/report.tex" "report.pdf" "report" 1730410193.28638 2
+  "/home/shady/.miktex/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt" 1730410183.35008 8730908 18f58320c6952e0c8446745eb8c92a9a ""
+  "/home/shady/.miktex/texmfs/install/fonts/tfm/public/cm/cmr12.tfm" 1730410140.3062 1288 655e228510b4c2a1abe905c368440826 ""
+  "/home/shady/.miktex/texmfs/install/tex/latex/base/article.cls" 1730410126.53695 20144 67a5f8e0f9e445e8ec6834e595cebdc9 ""
+  "/home/shady/.miktex/texmfs/install/tex/latex/base/size12.clo" 1730410126.53695 8449 30d84ec2eac77409e31fe51403c1ed64 ""
+  "/home/shady/Documents/unige/mcm/report.tex" 1730409114 652 bedafe753144784e534aa165713a4814 ""
+  "graphicx.sty" 0 -1 0 ""
+  "report.aux" 0 -1 0 "pdflatex"
+  "report.tex" 1730409114 652 bedafe753144784e534aa165713a4814 ""
+  (generated)
+  "report.aux"
+  "report.log"
+  "report.pdf"
+  (rewritten before read)

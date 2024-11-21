@@ -1,0 +1,10 @@
+PWD /home/shady/Documents/unige/mcm
+INPUT /home/shady/.miktex/texmfs/data/miktex/data/le/pdftex/pdflatex.fmt
+INPUT /home/shady/Documents/unige/mcm/report.tex
+OUTPUT report.log
+INPUT /home/shady/.miktex/texmfs/install/tex/latex/base/article.cls
+INPUT /home/shady/.miktex/texmfs/install/tex/latex/base/article.cls
+INPUT /home/shady/.miktex/texmfs/install/tex/latex/base/size12.clo
+INPUT /home/shady/.miktex/texmfs/install/tex/latex/base/size12.clo
+INPUT /home/shady/.miktex/texmfs/install/tex/latex/base/size12.clo
+INPUT /home/shady/.miktex/texmfs/install/fonts/tfm/public/cm/cmr12.tfm
