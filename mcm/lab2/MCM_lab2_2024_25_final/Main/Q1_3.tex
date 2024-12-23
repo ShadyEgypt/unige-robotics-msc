@@ -1,0 +1,54 @@
+\subsection{Q1.3}
+
+\subsubsection{Method}
+For this question, we have to implement the method of geometricModel called $getTransformWrtBase()$ which should compute the transformation matrix from the base to a given frame named $k$. The function will first check if $k$ is more than 0 and lower than the number of joint of the robot. Then, starting from the identity matrix (corresponding to  $^{b}_{b} T$) , it will loop with i from 1 to k by doing a right product on the previous matrix with the transformation matrix $^{i-1}_{i} T$. Indeed, we have that $^b_k T = {^b_1 T} {^1_2 T} ...  {^{k-1}_k T} $.
+
+\subsubsection{Compute $^b_e T$}
+
+To compute $^b_e T$, we have to use the function $getTransformWrtBase$ just written with the total number of joints as argument. We can have that number by computing the length of the $jointType$ list. Then, the function will compute the transformation matrix from the base frame to the end effector by doing this calculus : $^b_e T = {^b_1 T} {^1_2 T} {^2_3 T} {^3_4 T} {^4_5 T} {^5_6 T} {^6_e T} $ . 
+
+Finally, with \[
+q = \begin{pmatrix}
+    \frac{\pi}{4} & -\frac{\pi}{4} & 0 & -\frac{\pi}{4} & 0 & 0.15 & \frac{\pi}{4}
+\end{pmatrix}
+\] we obtain : 
+
+\[^b_e T(q) = \begin{pmatrix}
+        -0.5 & -0.5 & -0.7071 & -0.7039 \\
+        0.5 & 0.5 & -0.7071 & -0.7039 \\
+        0.7071 & -0.7071 & 0 & 0.5155 \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix}\]
+
+In this matrix, we can see that the orientation of the end effector is rotated around the three axis of the base frame and its position with respect of the base frame is $(x_e,y_e,z_e)=(-0.7039, -0.7039, 0.5155)$.
+
+\subsubsection{Compute $^5_3 T$}
+
+To compute $^5_3 T$, we have to do some calculation. 
+First, let's compute $^3_5 T$
+
+\[ ^3_5 T = {^3_b T}  {^b_5 T} = {^b_3 T}^{-1} {^b_5 T}  \]
+
+Then, 
+
+\[ ^5_3 T = {^3_5 T}^{-1} = {({^b_3 T}^{-1} {^b_5 T})}^{-1} \]
+
+And we know that we can get $^b_3 T$ with $getTransformWrtBase(3)$ and $^b_5 T$ with $getTransformWrtBase(5)$. So, we can compute $^5_3 T$ in Matlab with \[
+q = \begin{pmatrix}
+    \frac{\pi}{4} & -\frac{\pi}{4} & 0 & -\frac{\pi}{4} & 0 & 0.15 & \frac{\pi}{4}
+\end{pmatrix}
+\] and we obtain :
+
+\[^5_3 T(q) = \begin{pmatrix}
+        0 & 0.7071 & -0.7071 & -0.2298 \\
+        -1 & 0 & 0 & 0 \\
+        0 & 0.7071 & 0.7071 & -0.3248 \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix}\]
+
+
+In this matrix, we can notice that $\frac{\sqrt{2}}{2} \approx 0.7071$. Moreover, we know that $sin(\frac{\pi}{4}) = \frac{\sqrt{2}}{2} $ and $cos(\frac{\pi}{4}) = \frac{\sqrt{2}}{2} $. So it's coherent with the rotation of $\frac{\pi}{4}$ due to $q_4$ as $q_3=0$ and $q_5=0$.
+
+Finally, we find the same result as computing directly ${({^3_4 T(0)} {^4_5 T(\frac{\pi}{4})})}^{-1}$ using the Q1.2.
+
+\newpage
