@@ -1,0 +1,78 @@
+\subsection{Q1.1}
+
+For the first question, we have to complete the Matlab function \textit{BuildTree}  based on the CAD model of the industrial 7 DoF manipulator \ref{fig:ex2}. The robot is in a singular configuration, and we can easily compute each transformation matrix between each frame. 
+
+We will use the general formula of the transformation matrix between two frames
+\[
+^{i-1}_i T = \begin{pmatrix}
+        ^{i-1}_i R & ^{i-1}O_i & \\
+        \textbf{0} & 1 & \\
+        \end{pmatrix}
+\]
+
+For the transformation matrix from the base frame to frame 1, we only have a translation along the z-axis of 0.105 m without rotation. So, the transformation matrix is as follows:
+
+\[^b_1 T = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0.105 \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix}\]
+\\
+For the transformation matrix from frame 1 to frame 2, we have a translation along the z-axis of 0.110 m. And a vector (x,y,z) is transformed into a vector (y,z,x) from frame 1 to frame 2. So, the transformation matrix is as follows:
+
+\[^1_2 T = \begin{pmatrix}
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        1 & 0 & 0 & 0.110 \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix}\]
+\\
+For the transformation matrix from frame 2 to frame 3, we have a translation along the x-axis of 0.1 m. In addition, a vector (x, y, z) is transformed to a vector (z,-y,x). So, the transformation matrix is as follows:
+
+\[^2_3 T = \begin{pmatrix}
+        0 & 0 & 1 & 0.1 \\
+        0 & -1 & 0 & 0 \\
+        1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1 
+    \end{pmatrix}\]
+
+For the transformation matrix from frame 3 to frame 4, we have a translation along the z-axis of 0.325 m. Then, a vector (x,y,z) is transformed to a vector (z,-y,x). So, the transformation matrix is as follows: 
+
+\[^3_4 T = \begin{pmatrix}
+        0 & 0 & 1 & 0 \\
+        0 & -1 & 0 & 0 \\
+        1 & 0 & 0 & 0.325 \\
+        0 & 0 & 0 & 1 
+    \end{pmatrix}\]
+
+For the transformation matrix from frame 4 to frame 5, we have a translation along the x-axis of 0.095 m. Then, a vector (x,y,z) is transformed to a vector (-y,-z,x). So, the transformation matrix is as follows : 
+
+\[^4_5 T = \begin{pmatrix}
+        0 & 0 & 1 & 0.095 \\
+        -1 & 0 & 0 & 0 \\
+        0 & -1 & 0 & 0 \\
+        0 & 0 & 0 & 1 
+    \end{pmatrix}\]
+
+For the transformation matrix from frame 5 to frame 6, we have a translation along the z-axis of 0.095 m. Then, a vector (x,y,z) is transformed to a vector (-x,-y,z). So, the transformation matrix is as follows: 
+
+\[^5_6 T = \begin{pmatrix}
+        -1 & 0 & 0 & 0 \\
+        0 & -1 & 0 & 0 \\
+        0 & 0 & 1 & 0.095 \\
+        0 & 0 & 0 & 1 
+    \end{pmatrix}\]
+    
+For the transformation matrix from frame 6 to frame e of the end effector, we have a translation along the z-axis of 0.355 m and no rotation. So, the transformation matrix is as follows: 
+
+\[^6_e T = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0.355 \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix}\]
+
+Now, we can fill the \textit{BuildTree} function with these matrices.
+
+\newpage

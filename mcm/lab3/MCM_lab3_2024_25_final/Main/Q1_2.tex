@@ -1,0 +1,236 @@
+\subsection{Q1.2}
+
+Here, we need to build the method called $updateDirectGeometry$ of the $geometricModel$ class which should compute the model matrices as a function of the joint position $q$. Each joint contributes to the robot's motion by either rotating (revolute joint) or translating (prismatic joint). To model these motions mathematically, we compute a transformation matrix for each joint. Here's how it's done:
+
+\subsubsection{Revolute Joints}  
+
+A revolute joint rotates around its local z-axis. The transformation matrix that represents this rotation is given by:
+
+\[
+T_z(\theta_i) = 
+\begin{pmatrix}
+\cos(q_i) & -\sin(q_i) & 0 & 0 \\
+\sin(q_i) & \cos(q_i) & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+Here, \( q_i=\theta_i \) is the current angle of rotation for the joint i.
+
+\subsubsection{Prismatic Joints}
+
+A prismatic joint translates along its local z-axis. The transformation matrix for this translation is:
+
+\[
+T_z(d_i) =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & q_i \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+Here, \( q_i = d_i \) represents the value of the translation along the z-axis in meter.
+
+\subsubsection{Input}
+
+We will apply this method with the vector $q$ below : 
+\[
+q = \begin{pmatrix}
+    \frac{\pi}{4} & -\frac{\pi}{4} & 0 & -\frac{\pi}{4} & 0 & 0.15 & \frac{\pi}{4}
+\end{pmatrix}
+\]
+
+And the with this joint type vector corresponding to the robot:
+
+\[
+jointType = \begin{pmatrix}
+    0 & 0& 0&0 &0&1 &0
+\end{pmatrix}
+\]
+
+\subsubsection{Results}
+
+\paragraph{Joint 1 : revolute joint} 
+\subparagraph{We substitute with $\theta_1 = \frac{\pi}{4}$ in $T_z(\theta)$. The result is shown below after performing a product between $^{b}_1T$ and $T_z(\theta)$. For revolute joints, the translation vector is not affected by this operation.}
+
+\[
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0.105 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+0.7071 & -0.7071 & 0 & 0 \\
+0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0.7071 & -0.7071 & 0 & 0 \\
+0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0.105 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 2 : revolute joint}
+\subparagraph{We substitute with $\theta_2 = -\frac{\pi}{4}$ in $T_z(\theta)$. The result is shown below after performing a product between $^{1}_2T$ and $T_z(\theta)$. For revolute joints, the translation vector is not affected by this operation.}
+\[
+\begin{pmatrix}
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+1 & 0 & 0 & 0.110 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+0.7071 & 0.7071 & 0 & 0 \\
+-0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+-0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0.7071 & 0.7071 & 0 & 0.110 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 3 : revolute joint}
+\subparagraph{We substitute with $\theta_3 = 0$ in $T_z(\theta)$. The result is shown below after performing a product between $^{2}_3T$ and $T_z(\theta)$. The rotation matrix in this case is the identity matrix, indicating that no changes are applied to \( ^{2}_3T \) overall.}
+\[
+\begin{pmatrix}
+0 & 0 & 1 & 0.100 \\
+0 & -1 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 0 & 1 & 0.100 \\
+0 & -1 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 4 : revolute joint}
+\subparagraph{We substitute with $\theta_4 = -\frac{\pi}{4}$ in $T_z(\theta)$. The result is shown below after performing a product between $^{3}_4T$ and $T_z(\theta)$. For revolute joints, the translation vector is not affected by this operation.}
+\[
+\begin{pmatrix}
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & 0 \\
+1 & 0 & 0 & 0.325 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+0.7071 & 0.7071 & 0 & 0 \\
+-0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 0 & 1 & 0 \\
+0.7071 & -0.7071 & 0 & 0 \\
+0.7071 & 0.7071 & 0 & 0.325 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 5 : revolute joint}
+\subparagraph{We substitute with $\theta_5 = 0$ in $T_z(\theta)$. The result is shown below after performing a product between $^{4}_5T$ and $T_z(\theta)$. The rotation matrix in this case is the identity matrix, indicating that no changes are applied to \( ^{4}_5T \) overall.}
+\[
+\begin{pmatrix}
+0 & 0 & 1 & 0.095 \\
+-1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 0 & 1 & 0.095 \\
+-1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 6 : primastic joint}
+\subparagraph{We substitute with $d_6 = 0.15$ m in $T_z(d_6)$. The result is shown below after performing a product between $^{6}_7T$ and $T_z(d_6)$. For prismatic joints, the rotation matrix is not affected by this operation and we can see the translation vector in the output has a change in k direction, which is basically the sum of the values 0.095 and 0.150.}
+
+\[
+\begin{pmatrix}
+-1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & 1 & 0.095 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0.150 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+-1 & 0 & 0 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & 1 & 0.245 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Joint 7 : revolute joint}
+\subparagraph{We substitute with $\theta_7 = \frac{\pi}{4}$ in $T_z(\theta)$. The result is shown below after performing a product between $^{5}_6T$ and $T_z(\theta)$. For revolute joints, the translation vector is not affected by this operation.}
+\[
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0.355 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\
+\begin{pmatrix}
+0.7071 & -0.7071 & 0 & 0 \\
+0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+0.7071 & -0.7071 & 0 & 0 \\
+0.7071 & 0.7071 & 0 & 0 \\
+0 & 0 & 1 & 0.355 \\
+0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+
+\paragraph{Remark}
+\subparagraph{For each joint, we find the same transformation matrices as the Matlab output of the function $geometricModel$.}
+
+\newpage
