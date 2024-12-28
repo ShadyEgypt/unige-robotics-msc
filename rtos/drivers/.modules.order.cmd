@@ -1,0 +1,1 @@
+savedcmd_/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/modules.order := {   echo /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/simple.o; :; } > /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/modules.order

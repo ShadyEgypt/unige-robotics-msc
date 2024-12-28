@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Kernel Module",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-C",
+                "/lib/modules/$(uname -r)/build",
+                "M=${workspaceFolder}",
+                "modules",
+                "CC=/usr/bin/x86_64-linux-gnu-gcc-12"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

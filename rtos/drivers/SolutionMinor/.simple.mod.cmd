@@ -1,0 +1,1 @@
+savedcmd_/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/simple.mod := printf '%s\n'   simple.o | awk '!x[$$0]++ { print("/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/"$$0) }' > /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/simple.mod
