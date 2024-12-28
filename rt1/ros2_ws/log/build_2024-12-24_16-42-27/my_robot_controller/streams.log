@@ -1,0 +1,19 @@
+[0.865s] Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build --no-deps symlink_data
+[1.330s] running develop
+[1.607s] running egg_info
+[1.607s] writing my_robot_controller.egg-info/PKG-INFO
+[1.607s] writing dependency_links to my_robot_controller.egg-info/dependency_links.txt
+[1.608s] writing entry points to my_robot_controller.egg-info/entry_points.txt
+[1.608s] writing requirements to my_robot_controller.egg-info/requires.txt
+[1.608s] writing top-level names to my_robot_controller.egg-info/top_level.txt
+[1.611s] reading manifest file 'my_robot_controller.egg-info/SOURCES.txt'
+[1.613s] writing manifest file 'my_robot_controller.egg-info/SOURCES.txt'
+[1.615s] running build_ext
+[1.615s] Creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my-robot-controller.egg-link (link to .)
+[1.617s] Installing draw_circle script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[1.617s] Installing pose_subscriber script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[1.617s] Installing test_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[1.618s] 
+[1.618s] Installed /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller
+[1.618s] running symlink_data
+[1.670s] Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build --no-deps symlink_data

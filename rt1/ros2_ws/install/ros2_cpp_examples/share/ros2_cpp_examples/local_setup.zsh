@@ -1,0 +1,1 @@
+/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_cpp_examples/ament_cmake_environment_hooks/local_setup.zsh

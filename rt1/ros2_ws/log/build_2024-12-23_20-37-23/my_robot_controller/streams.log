@@ -1,0 +1,36 @@
+[1.151s] Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build
+[1.489s] running develop
+[1.692s] Removing /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my-robot-controller.egg-link (link to .)
+[1.724s] Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build
+[1.727s] Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed install_data --force
+[2.060s] running egg_info
+[2.060s] writing ../../build/my_robot_controller/my_robot_controller.egg-info/PKG-INFO
+[2.061s] writing dependency_links to ../../build/my_robot_controller/my_robot_controller.egg-info/dependency_links.txt
+[2.061s] writing entry points to ../../build/my_robot_controller/my_robot_controller.egg-info/entry_points.txt
+[2.061s] writing requirements to ../../build/my_robot_controller/my_robot_controller.egg-info/requires.txt
+[2.061s] writing top-level names to ../../build/my_robot_controller/my_robot_controller.egg-info/top_level.txt
+[2.063s] reading manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'
+[2.113s] writing manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'
+[2.113s] running build
+[2.113s] running build_py
+[2.114s] copying my_robot_controller/draw_circle.py -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[2.114s] copying my_robot_controller/my_first_node.py -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[2.114s] running install
+[2.115s] running install_lib
+[2.117s] creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[2.117s] copying /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/__init__.py -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[2.117s] copying /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/draw_circle.py -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[2.118s] copying /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/my_first_node.py -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[2.119s] byte-compiling /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/__init__.py to __init__.cpython-310.pyc
+[2.119s] byte-compiling /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/draw_circle.py to draw_circle.cpython-310.pyc
+[2.121s] byte-compiling /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/my_first_node.py to my_first_node.cpython-310.pyc
+[2.122s] running install_data
+[2.122s] copying resource/my_robot_controller -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/ament_index/resource_index/packages
+[2.123s] copying package.xml -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller
+[2.123s] running install_egg_info
+[2.129s] Copying ../../build/my_robot_controller/my_robot_controller.egg-info to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller-0.0.0-py3.10.egg-info
+[2.179s] running install_scripts
+[2.237s] Installing draw_circle script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[2.237s] Installing test_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[2.237s] writing list of installed files to '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/install.log'
+[2.267s] Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed install_data --force

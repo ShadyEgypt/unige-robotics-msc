@@ -1,0 +1,6 @@
+[console_scripts]
+client_node = ros2_python_examples.client:main
+publisher_node = ros2_python_examples.publisher:main
+server_node = ros2_python_examples.server:main
+subscriber_node = ros2_python_examples.subscriber:main
+

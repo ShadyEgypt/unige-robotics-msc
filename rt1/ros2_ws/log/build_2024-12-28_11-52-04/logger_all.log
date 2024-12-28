@@ -1,0 +1,245 @@
+[1.081s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[1.081s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7cec72b364a0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7cec72b35f60>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7cec72b35f60>>, mixin_verb=('build',))
+[2.017s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[2.017s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[2.018s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[2.018s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[2.018s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[2.018s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[2.018s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws'
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[2.018s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.030s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extensions ['ignore', 'ignore_ament_install']
+[2.031s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extension 'ignore'
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extension 'ignore_ament_install'
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extensions ['colcon_pkg']
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extension 'colcon_pkg'
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extensions ['colcon_meta']
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extension 'colcon_meta'
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extensions ['ros']
+[2.032s] Level 1:colcon.colcon_core.package_identification:_identify(src/my_robot_controller) by extension 'ros'
+[2.034s] DEBUG:colcon.colcon_core.package_identification:Package 'src/my_robot_controller' with type 'ros.ament_python' and name 'my_robot_controller'
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['ignore', 'ignore_ament_install']
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ignore'
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ignore_ament_install'
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['colcon_pkg']
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'colcon_pkg'
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['colcon_meta']
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'colcon_meta'
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extensions ['ros']
+[2.035s] Level 1:colcon.colcon_core.package_identification:_identify(src/robot_description) by extension 'ros'
+[2.036s] DEBUG:colcon.colcon_core.package_identification:Package 'src/robot_description' with type 'ros.catkin' and name 'robot_description'
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extensions ['ignore', 'ignore_ament_install']
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extension 'ignore'
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extension 'ignore_ament_install'
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extensions ['colcon_pkg']
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extension 'colcon_pkg'
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extensions ['colcon_meta']
+[2.036s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extension 'colcon_meta'
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extensions ['ros']
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_cpp_examples) by extension 'ros'
+[2.037s] DEBUG:colcon.colcon_core.package_identification:Package 'src/ros2_cpp_examples' with type 'ros.ament_cmake' and name 'ros2_cpp_examples'
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extensions ['ignore', 'ignore_ament_install']
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extension 'ignore'
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extension 'ignore_ament_install'
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extensions ['colcon_pkg']
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extension 'colcon_pkg'
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extensions ['colcon_meta']
+[2.037s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extension 'colcon_meta'
+[2.038s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extensions ['ros']
+[2.038s] Level 1:colcon.colcon_core.package_identification:_identify(src/ros2_python_examples) by extension 'ros'
+[2.038s] DEBUG:colcon.colcon_core.package_identification:Package 'src/ros2_python_examples' with type 'ros.ament_python' and name 'ros2_python_examples'
+[2.038s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[2.038s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[2.038s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[2.038s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[2.038s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[2.341s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[2.341s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[2.353s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 3 installed packages in /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install
+[2.360s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 270 installed packages in /opt/ros/humble
+[2.365s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_args' from command line to 'None'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_target' from command line to 'None'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_clean_first' from command line to 'False'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'cmake_force_configure' from command line to 'False'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'ament_cmake_args' from command line to 'None'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[2.429s] Level 5:colcon.colcon_core.verb:set package 'my_robot_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.429s] DEBUG:colcon.colcon_core.verb:Building package 'my_robot_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller', 'merge_install': False, 'path': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller', 'symlink_install': False, 'test_result_base': None}
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_args' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_target' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_clean_cache' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_clean_first' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'cmake_force_configure' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'ament_cmake_args' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'catkin_cmake_args' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'robot_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.430s] DEBUG:colcon.colcon_core.verb:Building package 'robot_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/robot_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description', 'merge_install': False, 'path': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/robot_description', 'symlink_install': False, 'test_result_base': None}
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_args' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_target' from command line to 'None'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_clean_cache' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_clean_first' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'cmake_force_configure' from command line to 'False'
+[2.430s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'ament_cmake_args' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'catkin_cmake_args' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_cpp_examples' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.431s] DEBUG:colcon.colcon_core.verb:Building package 'ros2_cpp_examples' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_cpp_examples', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_cpp_examples', 'merge_install': False, 'path': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_cpp_examples', 'symlink_install': False, 'test_result_base': None}
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_args' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_target' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_clean_cache' from command line to 'False'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_clean_first' from command line to 'False'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'cmake_force_configure' from command line to 'False'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'ament_cmake_args' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'catkin_cmake_args' from command line to 'None'
+[2.431s] Level 5:colcon.colcon_core.verb:set package 'ros2_python_examples' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.431s] DEBUG:colcon.colcon_core.verb:Building package 'ros2_python_examples' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples', 'merge_install': False, 'path': '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_python_examples', 'symlink_install': False, 'test_result_base': None}
+[2.431s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.432s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.433s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller' with build type 'ament_python'
+[2.433s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_controller', 'ament_prefix_path')
+[2.451s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.451s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/ament_prefix_path.ps1'
+[2.460s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/ament_prefix_path.dsv'
+[2.474s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/ament_prefix_path.sh'
+[2.478s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.478s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.493s] INFO:colcon.colcon_ros.task.catkin.build:Building ROS package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/robot_description' with build type 'catkin'
+[2.494s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/robot_description'
+[2.495s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.495s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.511s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_cpp_examples' with build type 'ament_cmake'
+[2.511s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_cpp_examples'
+[2.512s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.513s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.521s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_python_examples' with build type 'ament_python'
+[2.521s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros2_python_examples', 'ament_prefix_path')
+[2.522s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/ament_prefix_path.ps1'
+[2.523s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/ament_prefix_path.dsv'
+[2.523s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/ament_prefix_path.sh'
+[2.524s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.524s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.902s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller'
+[2.902s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.902s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.967s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/robot_description': /usr/bin/cmake /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/robot_description -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description
+[3.010s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_cpp_examples': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller:/opt/ros/humble /usr/bin/cmake /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_cpp_examples -DCMAKE_INSTALL_PREFIX=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_cpp_examples
+[3.381s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_python_examples'
+[3.381s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[3.381s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.781s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build
+[4.782s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build
+[5.501s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build
+[5.505s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed install_data --force
+[5.510s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build
+[5.514s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_python_examples': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros2_python_examples build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/install.log --single-version-externally-managed install_data --force
+[5.946s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/my_robot_controller' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed install_data --force
+[6.050s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller' for CMake module files
+[6.051s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller' for CMake config files
+[6.053s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib'
+[6.053s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/bin'
+[6.053s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/pkgconfig/my_robot_controller.pc'
+[6.053s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages'
+[6.054s] Level 1:colcon.colcon_core.shell:create_environment_hook('my_robot_controller', 'pythonpath')
+[6.054s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/pythonpath.ps1'
+[6.055s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/pythonpath.dsv'
+[6.055s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/hook/pythonpath.sh'
+[6.056s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/bin'
+[6.056s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(my_robot_controller)
+[6.057s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/package.ps1'
+[6.070s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/package.dsv'
+[6.084s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/package.sh'
+[6.086s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/package.bash'
+[6.097s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/my_robot_controller/package.zsh'
+[6.108s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/my_robot_controller/share/colcon-core/packages/my_robot_controller)
+[6.110s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples' for CMake module files
+[6.111s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/ros2_python_examples' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ros2_python_examples build --build-base /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build install --record /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/install.log --single-version-externally-managed install_data --force
+[6.112s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples' for CMake config files
+[6.112s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib'
+[6.113s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/bin'
+[6.113s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/pkgconfig/ros2_python_examples.pc'
+[6.113s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages'
+[6.113s] Level 1:colcon.colcon_core.shell:create_environment_hook('ros2_python_examples', 'pythonpath')
+[6.113s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/pythonpath.ps1'
+[6.114s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/pythonpath.dsv'
+[6.114s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/hook/pythonpath.sh'
+[6.115s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/bin'
+[6.116s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(ros2_python_examples)
+[6.117s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/package.ps1'
+[6.118s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/package.dsv'
+[6.120s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/package.sh'
+[6.122s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/package.bash'
+[6.123s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples/package.zsh'
+[6.123s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/colcon-core/packages/ros2_python_examples)
+[6.127s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/robot_description' returned '1': /usr/bin/cmake /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/src/robot_description -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description
+[6.145s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(robot_description)
+[6.146s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description' for CMake module files
+[6.146s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description' for CMake config files
+[6.146s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/bin'
+[6.146s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/lib/pkgconfig/robot_description.pc'
+[6.147s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/lib/python3.10/site-packages'
+[6.147s] Level 1:colcon.colcon_core.environment:checking '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/bin'
+[6.147s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/robot_description/package.ps1'
+[6.148s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/robot_description/package.dsv'
+[6.148s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/robot_description/package.sh'
+[6.149s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/robot_description/package.bash'
+[6.149s] INFO:colcon.colcon_core.shell:Creating package script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/robot_description/package.zsh'
+[6.150s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/robot_description/share/colcon-core/packages/robot_description)
+[7.171s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[7.171s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[7.171s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[7.171s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[7.214s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[7.214s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[7.214s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[7.243s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[7.243s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/local_setup.ps1'
+[7.245s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/_local_setup_util_ps1.py'
+[7.247s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/setup.ps1'
+[7.248s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/local_setup.sh'
+[7.250s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/_local_setup_util_sh.py'
+[7.251s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/setup.sh'
+[7.253s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/local_setup.bash'
+[7.254s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/setup.bash'
+[7.256s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/local_setup.zsh'
+[7.256s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/setup.zsh'

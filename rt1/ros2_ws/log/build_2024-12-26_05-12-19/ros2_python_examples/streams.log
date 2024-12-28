@@ -1,0 +1,27 @@
+[1.175s] Invoking command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build --no-deps symlink_data
+[1.507s] running develop
+[1.709s] running egg_info
+[1.709s] creating ros2_python_examples.egg-info
+[1.709s] writing ros2_python_examples.egg-info/PKG-INFO
+[1.710s] writing dependency_links to ros2_python_examples.egg-info/dependency_links.txt
+[1.710s] writing entry points to ros2_python_examples.egg-info/entry_points.txt
+[1.710s] writing requirements to ros2_python_examples.egg-info/requires.txt
+[1.710s] writing top-level names to ros2_python_examples.egg-info/top_level.txt
+[1.711s] writing manifest file 'ros2_python_examples.egg-info/SOURCES.txt'
+[1.715s] reading manifest file 'ros2_python_examples.egg-info/SOURCES.txt'
+[1.716s] writing manifest file 'ros2_python_examples.egg-info/SOURCES.txt'
+[1.717s] running build_ext
+[1.718s] Creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages/ros2-python-examples.egg-link (link to .)
+[1.719s] Installing client_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/ros2_python_examples
+[1.719s] Installing publisher_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/ros2_python_examples
+[1.719s] Installing server_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/ros2_python_examples
+[1.720s] Installing subscriber_node script to /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/ros2_python_examples
+[1.720s] 
+[1.720s] Installed /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples
+[1.720s] running symlink_data
+[1.720s] creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ament_index
+[1.721s] creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ament_index/resource_index
+[1.721s] creating /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ament_index/resource_index/packages
+[1.721s] symbolically linking /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/resource/ros2_python_examples -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ament_index/resource_index/packages
+[1.721s] symbolically linking /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/package.xml -> /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/share/ros2_python_examples
+[1.771s] Invoked command in '/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples' returned '0': PYTHONPATH=/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/install/ros2_python_examples/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/shady/Documents/unige-robotics-msc/rt1/ros2_ws/build/ros2_python_examples/build --no-deps symlink_data
