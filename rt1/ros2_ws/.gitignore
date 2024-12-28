@@ -1,3 +1,7 @@
 build/*
 build/my_robot_controller
 devel/*
+.vscode/
+log/
+build/
+install/
