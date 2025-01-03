@@ -17,13 +17,15 @@
 // Global variable declarations (use extern)
 extern FILE *log_file;
 extern bool resources_exist;
-extern sem_t *g1, *g2, *g3;
+extern sem_t *grid_sem, *globals_sem, *drone_sem, *config_sem;
 extern int server_fd, drone_fd;
 
 extern Grid *grid;
 extern Globals *globals;
 extern Drone *drone;
+extern Config *config;
 
+extern pid_t parent_pid;
 extern pid_t child1_pid;
 extern pid_t child2_pid;
 extern pid_t child3_pid;
@@ -37,5 +39,6 @@ void clear_grid_except_254(Grid *grid);
 void setup_resources();
 void cleanup_resources();
 void handle_sigint(int sig);
-
+Grid *create_grid();
+void free_grid(Grid *grid);
 #endif // SERVER_UTILS_H

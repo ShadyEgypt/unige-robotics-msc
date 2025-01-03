@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include "globals.h"
 #include <semaphore.h>
+#include <cjson/cJSON.h>
 
 // Initialize the log file in the logs folder
 FILE *initialize_log_file(const char *log_filename);
@@ -25,7 +26,6 @@ sem_t *open_semaphore(const char *sem_name);
 void acquire_semaphore(sem_t *sem);
 void release_semaphore(sem_t *sem);
 void destroy_semaphore(const char *sem_name, sem_t *sem);
-bool is_point_occupied(Grid *grid, int x, int y);                                             // Check if a point is occupied
-void set_grid_point(Grid *grid, int x, int y, int value, GridPointType type, FILE *log_file); // Set a point in the grid
-void set_map_point(Grid *grid, Drone *drone, MapServerClient *map, FILE *log_file);
+bool is_point_occupied(Grid *grid, int x, int y, int grid_h, int grid_w);
+void set_grid_point(Grid *grid, GridPointType type, FILE *log_file, Config *config, int x, int y, int value);
 #endif // UTILS_

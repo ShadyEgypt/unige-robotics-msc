@@ -37,6 +37,7 @@ void reset_obstacles_handler(int sig)
 int main()
 {
     log_file = initialize_log_file("obstacles.txt");
+    log_message(log_file, "Obstacles process started.");
     // Register signal handlers
     signal(SIGINT, handle_sigint);
     signal(SIGUSR1, reset_obstacles_handler);

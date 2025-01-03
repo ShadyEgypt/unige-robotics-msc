@@ -4,7 +4,6 @@
 bool targets_resources_exist = false; // To store shared memory address
 Grid *g1;
 Globals *g2;
-MapServerClient *g3;
 sem_t *s1;
 sem_t *s2;
 
@@ -32,14 +31,6 @@ void reset_targets_handler(int sig)
     set_targets_randomly(g1, log_file);
     release_semaphore(s1);
     printf("Semaphore unlocked!\n");
-    // // reset the map
-    g3->request_id = 1;
-    sprintf(g3->action, "reset_map");
-    sprintf(g3->payload, ""); // No specific payload needed
-    g3->is_valid = true;
-    g3->has_response = false;
-    int wait_time = 0;
-    printf("[DEBUG] Waiting for reset_map response...\n");
 }
 
 int main()
@@ -59,10 +50,6 @@ int main()
     void *globals_addr = map_shared_memory(shm_g_fd, SHM_G_SIZE);
     Globals *globals = (Globals *)globals_addr;
 
-    int shm_map_fd = attach_shared_memory(SHM_MAP_NAME, SHM_MAP_SIZE);
-    void *map_addr = map_shared_memory(shm_map_fd, SHM_MAP_SIZE);
-    MapServerClient *map_targets = (MapServerClient *)map_addr;
-
     srand(time(NULL));
 
     // Open semaphore
@@ -71,7 +58,7 @@ int main()
 
     g1 = grid;
     g2 = globals;
-    g3 = map_targets;
+
     s1 = sem_grid;
     s2 = sem_g;
 

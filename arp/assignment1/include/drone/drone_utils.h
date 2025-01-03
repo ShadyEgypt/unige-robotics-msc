@@ -25,7 +25,7 @@ extern bool resources_exist;
 extern Grid *grid;
 extern Globals *globals;
 extern Drone *drone;
-extern MapServerClient *map;
+extern Config *config;
 
 extern pid_t child1_pid;
 extern pid_t child2_pid;
@@ -47,7 +47,6 @@ void update_user_force(Drone *drone, char cmd);
 void calculate_total_force(Drone *drone);
 void update_position(Drone *drone, Grid *grid);
 void update_velocity(Drone *drone);
-void update_position(Drone *drone, Grid *grid);
 int enqueue_cmd(Drone *drone, char command);
 char dequeue_cmd(Drone *drone);
 int is_cmd_empty(Drone *drone);

@@ -1,6 +1,7 @@
 # Compiler and Flags
 CC = gcc
-CFLAGS = -lncurses -lrt -pthread -lm -Wall -Wextra -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)/drone -I$(INCLUDE_DIR)/map
+CFLAGS = -Wall -Wextra -I/usr/include/cjson -I$(INCLUDE_DIR) -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)/drone -I$(INCLUDE_DIR)/map
+LDFLAGS = -lncurses -lrt -pthread -lm -lcjson
 LOG_DIR = logs
 BUILD_DIR = build
 SRC_DIR = src
@@ -37,23 +38,23 @@ $(BUILD_DIR)/server:
 	mkdir -p $(BUILD_DIR)/server
 
 # Build the executables
-display: $(BUILD_DIR)/display/display.o $(BUILD_DIR)/display/display_utils.o $(BUILD_DIR)/display/dynamic_display.o $(BUILD_DIR)/display/input_display.o $(BUILD_DIR)/utils.o
-	$(CC) -o display $^ $(CFLAGS)
+display: $(BUILD_DIR)/display/display.o $(BUILD_DIR)/display/display_utils.o $(BUILD_DIR)/utils.o
+	$(CC) -o display $^ $(CFLAGS) $(LDFLAGS)
 
 server: $(BUILD_DIR)/server/server.o $(BUILD_DIR)/server/server_utils.o $(BUILD_DIR)/utils.o
-	$(CC) -o server $^ $(CFLAGS)
+	$(CC) -o server $^ $(CFLAGS) $(LDFLAGS)
 
 map: $(BUILD_DIR)/map/map.o $(BUILD_DIR)/utils.o $(BUILD_DIR)/map/map_utils.o
-	$(CC) -o map $^ $(CFLAGS)
+	$(CC) -o map $^ $(CFLAGS) $(LDFLAGS)
 
 targets: $(BUILD_DIR)/map/targets.o $(BUILD_DIR)/utils.o $(BUILD_DIR)/map/map_utils.o
-	$(CC) -o targets $^ $(CFLAGS)
+	$(CC) -o targets $^ $(CFLAGS) $(LDFLAGS)
 
 obstacles: $(BUILD_DIR)/map/obstacles.o $(BUILD_DIR)/utils.o $(BUILD_DIR)/map/map_utils.o
-	$(CC) -o obstacles $^ $(CFLAGS)
+	$(CC) -o obstacles $^ $(CFLAGS) $(LDFLAGS)
 
 drone: $(BUILD_DIR)/drone/drone.o $(BUILD_DIR)/drone/drone_utils.o $(BUILD_DIR)/utils.o
-	$(CC) -o drone $^ $(CFLAGS)
+	$(CC) -o drone $^ $(CFLAGS) $(LDFLAGS)
 
 # Compile object files for each module
 
@@ -62,12 +63,6 @@ $(BUILD_DIR)/display/display.o: $(DISPLAY_SRC)/display.c $(INCLUDE_DIR)/display/
 	$(CC) -c $< -o $@ -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)
 
 $(BUILD_DIR)/display/display_utils.o: $(DISPLAY_SRC)/display_utils.c $(INCLUDE_DIR)/display/display_utils.h $(INCLUDE_DIR)/globals.h | $(BUILD_DIR)/display
-	$(CC) -c $< -o $@ -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)
-
-$(BUILD_DIR)/display/input_display.o: $(DISPLAY_SRC)/input_display.c $(INCLUDE_DIR)/display/input_display.h $(INCLUDE_DIR)/globals.h | $(BUILD_DIR)/display
-	$(CC) -c $< -o $@ -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)
-
-$(BUILD_DIR)/display/dynamic_display.o: $(DISPLAY_SRC)/dynamic_display.c $(INCLUDE_DIR)/display/dynamic_display.h $(INCLUDE_DIR)/globals.h | $(BUILD_DIR)/display
 	$(CC) -c $< -o $@ -I$(INCLUDE_DIR)/display -I$(INCLUDE_DIR)
 
 # DRONE MODULE

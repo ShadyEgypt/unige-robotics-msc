@@ -175,10 +175,10 @@ void destroy_semaphore(const char *sem_name, sem_t *sem)
     }
 }
 
-bool is_point_occupied(Grid *grid, int x, int y)
+bool is_point_occupied(Grid *grid, int x, int y, int grid_h, int grid_w)
 {
     // a function that returns a value greater than 0 if the point is not free
-    if (x < 0 || x >= GRID_SIZE || y < 0 || y >= GRID_SIZE)
+    if (x < 0 || x >= grid_w || y < 0 || y >= grid_h)
     {
         return true;
     }
@@ -187,11 +187,11 @@ bool is_point_occupied(Grid *grid, int x, int y)
 }
 
 // Set a grid point with additional handling for TARGET, OBSTACLE, and DRONE
-void set_grid_point(Grid *grid, int x, int y, int value, GridPointType type, FILE *log_file)
+void set_grid_point(Grid *grid, GridPointType type, FILE *log_file, Config *config, int x, int y, int value)
 {
     char log_buffer[256];
 
-    if (x < 0 || x >= GRID_WIDTH || y < 0 || y >= GRID_HEIGHT)
+    if (x < 0 || x >= config->Map.Size.Width || y < 0 || y >= config->Map.Size.Height)
     {
         sprintf(log_buffer, "Error: Grid coordinates out of bounds.");
         log_message(log_file, log_buffer);
@@ -211,78 +211,68 @@ void set_grid_point(Grid *grid, int x, int y, int value, GridPointType type, FIL
         break;
 
     case OBSTACLE:
-        if (grid->obstacle_count < MAX_OBSTACLES)
-        {
-            grid->obstacles[grid->obstacle_count].x = (float)x;
-            grid->obstacles[grid->obstacle_count].y = (float)y;
-            grid->obstacle_count++;
+        grid->obstacles[grid->obstacle_count].x = x;
+        grid->obstacles[grid->obstacle_count].y = y;
+        grid->obstacle_count++;
 
-            sprintf(log_buffer, "Obstacle set at (%d, %d).", x, y);
-            log_message(log_file, log_buffer);
-        }
-        else
-        {
-            sprintf(log_buffer, "Error: Maximum number of obstacles reached.");
-            log_message(log_file, log_buffer);
-        }
+        sprintf(log_buffer, "Obstacle set at (%d, %d).", x, y);
+        log_message(log_file, log_buffer);
         break;
 
     case DRONE:
-        int screen_x = 1 + x * (grid->grid_actual_width - 3) / GRID_WIDTH;
-        int screen_y = 1 + y * (grid->grid_actual_height - 3) / GRID_HEIGHT;
-        if (grid->grid[screen_y][screen_x] == 255) // Drone hits an obstacle
+        if (grid->grid[y][x] == 255) // Drone hits an obstacle
         {
             grid->score -= 2;
             sprintf(log_buffer, "Drone hit an obstacle at (%d, %d).", x, y);
             log_message(log_file, log_buffer);
-            grid->drone_pos.x = x;
+            grid->drone_pos.x = x + 1;
             grid->drone_pos.y = y;
             // it will be scaled by the map process
         }
-        else if (grid->grid[screen_y][screen_x] == 0) // Empty space
+        else if (grid->grid[y][x] == 0) // Empty space
         {
             sprintf(log_buffer, "Drone moved to empty space at (%d, %d).", x, y);
             log_message(log_file, log_buffer);
             grid->drone_pos.x = x;
             grid->drone_pos.y = y;
         }
-        else if (grid->grid[screen_y][screen_x] > 0 & grid->grid[screen_y][screen_x] < 255) // Any other value (assuming it's a target)
+        else if (grid->grid[y][x] > 0 & grid->grid[y][x] < 255) // Any other value (assuming it's a target)
         {
             char log_buffer[256];
             int final_number = grid->grid[y][x]; // Start with the current digit
 
             // Check the left adjacent cell
-            if (x > 0 && grid->grid[screen_y][screen_x - 1] >= 0 && grid->grid[screen_y][screen_x - 1] <= 9)
+            if (x > 0 && grid->grid[y][x - 1] >= 0 && grid->grid[y][x - 1] <= 9)
             {
                 // Left cell is a digit; concatenate
-                final_number = grid->grid[screen_y][screen_x - 1] * 10 + grid->grid[screen_y][screen_x];
+                final_number = grid->grid[y][x - 1] * 10 + grid->grid[y][x];
                 sprintf(log_buffer, "Drone hit a multi-digit target %d formed at (%d, %d) and (%d, %d).",
-                        final_number, screen_x - 1, screen_y, screen_x, screen_y);
+                        final_number, x - 1, y, x, y);
                 log_message(log_file, log_buffer);
 
                 // Clear the left and current grid spots
-                grid->grid[screen_y][screen_x - 1] = 0;
-                grid->grid[screen_y][screen_x] = 0;
+                grid->grid[y][x - 1] = 0;
+                grid->grid[y][x] = 0;
             }
             // Check the right adjacent cell
-            else if (x < GRID_WIDTH - 1 && grid->grid[screen_y][screen_x + 1] >= 0 && grid->grid[screen_y][screen_x + 1] <= 9)
+            else if (x < config->Map.Size.Width - 1 && grid->grid[y][x + 1] >= 0 && grid->grid[y][x + 1] <= 9)
             {
                 // Right cell is a digit; concatenate
-                final_number = grid->grid[screen_y][screen_x] * 10 + grid->grid[screen_y][screen_x + 1];
+                final_number = grid->grid[y][x] * 10 + grid->grid[y][x + 1];
                 sprintf(log_buffer, "Drone hit a multi-digit target %d formed at (%d, %d) and (%d, %d).",
-                        final_number, screen_x, screen_y, screen_x + 1, screen_y);
+                        final_number, x, y, x + 1, y);
                 log_message(log_file, log_buffer);
 
                 // Clear the current and right grid spots
-                grid->grid[screen_y][screen_x] = 0;
-                grid->grid[screen_y][screen_x + 1] = 0;
+                grid->grid[y][x] = 0;
+                grid->grid[y][x + 1] = 0;
             }
             else
             {
                 // Single-digit target
                 sprintf(log_buffer, "Drone hit a single-digit target %d at (%d, %d).", final_number, x, y);
                 log_message(log_file, log_buffer);
-                grid->grid[screen_y][screen_x] = 0;
+                grid->grid[y][x] = 0;
             }
 
             // Remove the target from the list
@@ -309,7 +299,7 @@ void set_grid_point(Grid *grid, int x, int y, int value, GridPointType type, FIL
             // Set the drone's new position
             grid->drone_pos.x = x;
             grid->drone_pos.y = y;
-            sprintf(log_buffer, "Drone set at (%d, %d) with value %d.", screen_x, screen_y, 254);
+            sprintf(log_buffer, "Drone set at (%d, %d) with value %d.", x, y, 254);
             log_message(log_file, log_buffer);
         }
         break;
@@ -324,103 +314,4 @@ void set_grid_point(Grid *grid, int x, int y, int value, GridPointType type, FIL
         sprintf(log_buffer, "Error: Unknown grid point type.");
         log_message(log_file, log_buffer);
     }
-}
-
-void set_map_point(Grid *grid, Drone *drone, MapServerClient *map, FILE *log_file)
-{
-    char log_buffer[256];
-    int x_new = (int)drone->drone_pos.x, y_new = (int)drone->drone_pos.y, x_old = (int)drone->drone_pos_1.x, y_old = (int)drone->drone_pos_1.y;
-    // Log the initial drone position
-    snprintf(log_buffer, sizeof(log_buffer),
-             "[DEBUG] set_map_point: Drone current position (%d, %d), previous position (%d, %d).",
-             x_old, y_old, x_new, y_new);
-    log_message(log_file, log_buffer);
-
-    // Set the grid point for the drone
-    set_grid_point(grid, x_new, y_new, 254, DRONE, log_file);
-    snprintf(log_buffer, sizeof(log_buffer),
-             "[DEBUG] set_map_point: Grid point set for drone at (%d, %d).",
-             x_new, y_new);
-    log_message(log_file, log_buffer);
-
-    // Calculate screen position
-    int screen_x = 1 + x_new * (grid->grid_actual_width - 3) / GRID_WIDTH;
-    int screen_y = 1 + y_new * (grid->grid_actual_height - 3) / GRID_HEIGHT;
-    snprintf(log_buffer, sizeof(log_buffer),
-             "[DEBUG] set_map_point: Screen coordinates calculated (%d, %d). Grid value: %d.",
-             screen_x, screen_y, grid->grid[screen_y][screen_x]);
-    log_message(log_file, log_buffer);
-
-    // Check for obstacle
-    if (grid->grid[screen_y][screen_x] == 255) // Drone hits an obstacle
-    {
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[INFO] set_map_point: Drone hit an obstacle at (%d, %d).", screen_x, screen_y);
-        log_message(log_file, log_buffer);
-
-        map->request_id = 4;
-        strncpy(map->action, "drone_hit_obstacle", sizeof(map->action) - 1);
-        snprintf(map->payload, sizeof(map->payload),
-                 "{\"old_x\":%d,\"old_y\":%d,\"new_x\":%d,\"new_y\":%d,\"score\":%d}",
-                 x_old, y_old, x_new, y_new, grid->score);
-        map->is_valid = true;
-        map->has_response = false;
-
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[DEBUG] set_map_point: Obstacle request prepared (id: %d, action: %s, payload: %s).",
-                 map->request_id, map->action, map->payload);
-        log_message(log_file, log_buffer);
-    }
-    // Check for empty space
-    else if (grid->grid[screen_y][screen_x] == 0) // Empty space
-    {
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[INFO] set_map_point: Drone moved to an empty space at (%d, %d).", screen_x, screen_y);
-        log_message(log_file, log_buffer);
-
-        map->request_id = 2;
-        strncpy(map->action, "move_drone", sizeof(map->action) - 1);
-        snprintf(map->payload, sizeof(map->payload),
-                 "{\"old_x\":%d,\"old_y\":%d,\"new_x\":%d,\"new_y\":%d}",
-                 x_old, y_old, x_new, y_new);
-        map->is_valid = true;
-        map->has_response = false;
-
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[DEBUG] set_map_point: Move request prepared (id: %d, action: %s, payload: %s).",
-                 map->request_id, map->action, map->payload);
-        log_message(log_file, log_buffer);
-    }
-    // Check for target
-    else if (grid->grid[screen_y][screen_x] > 0 && grid->grid[screen_y][screen_x] < 255) // Drone hits a target
-    {
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[INFO] set_map_point: Drone hit a target at (%d, %d).", screen_x, screen_y);
-        log_message(log_file, log_buffer);
-
-        map->request_id = 3;
-        strncpy(map->action, "drone_hit_target", sizeof(map->action) - 1);
-        snprintf(map->payload, sizeof(map->payload),
-                 "{\"old_x\":%d,\"old_y\":%d,\"new_x\":%d,\"new_y\":%d,\"score\":%d}",
-                 x_old, y_old, x_new, y_new, grid->score);
-        map->is_valid = true;
-        map->has_response = false;
-
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[DEBUG] set_map_point: Target hit request prepared (id: %d, action: %s, payload: %s).",
-                 map->request_id, map->action, map->payload);
-        log_message(log_file, log_buffer);
-    }
-    else
-    {
-        snprintf(log_buffer, sizeof(log_buffer),
-                 "[WARNING] set_map_point: Unknown grid value at (%d, %d): %d",
-                 screen_x, screen_y, grid->grid[screen_y][screen_x]);
-        log_message(log_file, log_buffer);
-    }
-
-    snprintf(log_buffer, sizeof(log_buffer),
-             "[DEBUG] set_map_point: Completed processing drone position (%f, %f).",
-             drone->drone_pos.x, drone->drone_pos.y);
-    log_message(log_file, log_buffer);
 }

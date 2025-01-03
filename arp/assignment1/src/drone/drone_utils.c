@@ -10,7 +10,7 @@ bool resources_exist = false;
 Grid *grid = NULL;
 Globals *globals = NULL;
 Drone *drone = NULL;
-MapServerClient *map = NULL;
+Config *config = NULL;
 
 pid_t child1_pid = -1;
 pid_t child2_pid = -1;
@@ -36,9 +36,9 @@ void setup_resources()
     void *drone_addr = map_shared_memory(shm_drone_fd, SHM_DRONE_SIZE);
     drone = (Drone *)drone_addr;
 
-    int shm_map_fd = attach_shared_memory(SHM_MAP_NAME, SHM_MAP_SIZE);
-    void *map_addr = map_shared_memory(shm_map_fd, SHM_MAP_SIZE);
-    map = (MapServerClient *)map_addr;
+    int shm_config_fd = attach_shared_memory(SHM_CONFIG_NAME, SHM_CONFIG_SIZE);
+    void *config_addr = map_shared_memory(shm_config_fd, SHM_CONFIG_SIZE);
+    config = (Config *)config_addr;
 
     srand(time(NULL));
 
@@ -55,7 +55,7 @@ void setup_resources()
     globals->drone_pid = drone_pid;
 
     // open named pipe in read mode (non-blocking)
-    fd = open(DRONE_PIPE, O_RDONLY);
+    fd = open(config->Pipes.DronePipe, O_RDONLY);
     if (fd == -1)
     {
         perror("Failed to open drone pipe");
@@ -65,10 +65,13 @@ void setup_resources()
     // Set the drone in the shared memory to be (1,1)
     drone->drone_pos.x = 1;
     drone->drone_pos.y = 1;
-    drone->drone_pos_1.x = 1;
-    drone->drone_pos_1.y = 1;
-    set_grid_point(grid, drone->drone_pos.x, drone->drone_pos.y, 254, DRONE, log_file);
-    printf("Parent: All resources are initialized successfully.\n");
+    drone->drone_pos_1.x = 2;
+    drone->drone_pos_1.y = 2;
+    grid->drone_pos.x = 1;
+    grid->drone_pos.y = 1;
+    // log_message(log_file, "Drone position set to (1, 1)");
+    // set_grid_point(grid, DRONE, log_file, config, drone->drone_pos.x, drone->drone_pos.y, 254);
+    log_message(log_file, "Parent: All resources are initialized successfully.");
 }
 
 // Signal handler function for SIGINT
@@ -103,7 +106,7 @@ void handle_sigint(int sig)
         detach_shared_memory(grid, SHM_GRID_SIZE);
         detach_shared_memory(globals, SHM_G_SIZE);
         detach_shared_memory(drone, SHM_DRONE_SIZE);
-        detach_shared_memory(map, SHM_MAP_SIZE);
+        detach_shared_memory(config, SHM_CONFIG_SIZE);
         printf("Shared memory detached.\n");
     }
     close(fd);
@@ -123,39 +126,61 @@ float slow_down(void)
     return 0.f;
 }
 
+float repulsive_force(float distance, float function_scale,
+                      float area_of_effect, float vel_x, float vel_y)
+{
+    return function_scale * ((1 / distance) - (1 / area_of_effect)) *
+           (1 / (distance * distance)) * sqrt(pow(vel_x, 2) + pow(vel_y, 2));
+}
+
 // Update wall repulsive force with clamping
 void update_wall_force(Drone *drone)
 {
     drone->wall_force.x = 0.0f;
     drone->wall_force.y = 0.0f;
+    // if the left edge is detected
+    if (drone->drone_pos.x < config->EffectRadius.Wall)
+    {
+        drone->wall_force.x = repulsive_force(
+            drone->drone_pos.x, config->Forces.Wall, config->EffectRadius.Wall,
+            drone->drone_vel.x, drone->drone_vel.y);
+        // if the right edge is detected
+    }
+    else if (drone->drone_pos.x > config->Map.Size.Width - config->EffectRadius.Wall)
+    {
+        drone->wall_force.y = -repulsive_force(
+            config->Map.Size.Width - drone->drone_pos.x, config->Forces.Wall,
+            config->EffectRadius.Wall, drone->drone_vel.x, drone->drone_vel.y);
+    }
+    // Otherwise set it to 0
+    else
+    {
+        drone->wall_force.x = 0;
+    }
 
-    // Handle X-axis Wall Repulsion
-    if (drone->drone_pos.x < WALL_EFFECT_RADIUS)
+    // if the upper edge is detected
+    if (drone->drone_pos.y < config->EffectRadius.Wall)
     {
-        float safe_distance = fmaxf(drone->drone_pos.x, MIN_WALL_DISTANCE);
-        drone->wall_force.x += WALL_FORCE_CONSTANT / (safe_distance * safe_distance);
+        drone->wall_force.y = repulsive_force(
+            drone->drone_pos.y, config->Forces.Wall, config->EffectRadius.Wall,
+            drone->drone_vel.x, drone->drone_vel.y);
+        // if the lower edge is detected
     }
-    if (drone->drone_pos.x > GRID_WIDTH - WALL_EFFECT_RADIUS)
+    else if (drone->drone_pos.y > config->Map.Size.Height - config->EffectRadius.Wall)
     {
-        float safe_distance = fmaxf(GRID_WIDTH - drone->drone_pos.x, MIN_WALL_DISTANCE);
-        drone->wall_force.x -= WALL_FORCE_CONSTANT / (safe_distance * safe_distance);
+        drone->wall_force.y = -repulsive_force(
+            config->Map.Size.Height - drone->drone_pos.y, config->Forces.Wall,
+            config->EffectRadius.Wall, drone->drone_vel.y, drone->drone_vel.y);
     }
-
-    // Handle Y-axis Wall Repulsion
-    if (drone->drone_pos.y < WALL_EFFECT_RADIUS)
+    // Otherwise set it to 0
+    else
     {
-        float safe_distance = fmaxf(drone->drone_pos.y, MIN_WALL_DISTANCE);
-        drone->wall_force.y += WALL_FORCE_CONSTANT / (safe_distance * safe_distance);
-    }
-    if (drone->drone_pos.y > GRID_HEIGHT - WALL_EFFECT_RADIUS)
-    {
-        float safe_distance = fmaxf(GRID_HEIGHT - drone->drone_pos.y, MIN_WALL_DISTANCE);
-        drone->wall_force.y -= WALL_FORCE_CONSTANT / (safe_distance * safe_distance);
+        drone->wall_force.y = 0;
     }
 
     // Clamp Wall Forces
-    drone->wall_force.x = fminf(fmaxf(drone->wall_force.x, -MAX_WALL_FORCE), MAX_WALL_FORCE);
-    drone->wall_force.y = fminf(fmaxf(drone->wall_force.y, -MAX_WALL_FORCE), MAX_WALL_FORCE);
+    // drone->wall_force.x = fminf(fmaxf(drone->wall_force.x, -MAX_WALL_FORCE), MAX_WALL_FORCE);
+    // drone->wall_force.y = fminf(fmaxf(drone->wall_force.y, -MAX_WALL_FORCE), MAX_WALL_FORCE);
 
     // Logging
     char log_msg[256];
@@ -168,18 +193,37 @@ void update_obstacle_force(Drone *drone, Obstacle obstacles[], int obstacles_num
 {
     drone->obs_force.x = 0.0f;
     drone->obs_force.y = 0.0f;
-
     for (int i = 0; i < obstacles_num; i++)
     {
-        float distance = sqrt(pow(obstacles[i].x - drone->drone_pos.x, 2) + pow(obstacles[i].y - drone->drone_pos.y, 2));
-
-        if (distance < OBSTACLE_EFFECT_RADIUS && distance > MIN_DISTANCE)
+        float distance = sqrt(pow(obstacles[i].x - drone->drone_pos.x, 2) +
+                              pow(obstacles[i].y - drone->drone_pos.y, 2));
+        // If it's quite close but not too much then apply the force.
+        if (distance < config->EffectRadius.Obstacle && distance > 1)
         {
-            float force = OBSTACLE_FORCE_CONSTANT / (distance * distance);
-            float angle = atan2(obstacles[i].y - drone->drone_pos.y, obstacles[i].x - drone->drone_pos.x);
+            double x_distance = obstacles[i].x - drone->drone_pos.x;
+            double y_distance = obstacles[i].y - drone->drone_pos.y;
 
-            drone->obs_force.x -= cos(angle) * force;
-            drone->obs_force.y -= sin(angle) * force;
+            // Compute the magnitude of the repulsive force
+            double force =
+                -repulsive_force(distance, 10000, config->EffectRadius.Obstacle,
+                                 drone->drone_vel.x, drone->drone_vel.y);
+
+            // Compute the direction of the repulsive force
+            double angle = atan2(y_distance, x_distance);
+
+            // Add the force to the accumulation variable
+            drone->obs_force.x += cos(angle) * force;
+            drone->obs_force.y += sin(angle) * force;
+
+            // Cap the force at a certain threshold.
+            if (drone->obs_force.x > config->Thresholds.MaxObstacleForces)
+                drone->obs_force.x = config->Thresholds.MaxObstacleForces;
+            if (drone->obs_force.x < -config->Thresholds.MaxObstacleForces)
+                drone->obs_force.x = -config->Thresholds.MaxObstacleForces;
+            if (drone->obs_force.y > config->Thresholds.MaxObstacleForces)
+                drone->obs_force.y = config->Thresholds.MaxObstacleForces;
+            if (drone->obs_force.y < -config->Thresholds.MaxObstacleForces)
+                drone->obs_force.y = -config->Thresholds.MaxObstacleForces;
         }
     }
 
@@ -196,15 +240,35 @@ void update_target_force(Drone *drone, Target targets[], int targets_num)
 
     for (int i = 0; i < targets_num; i++)
     {
-        float distance = sqrt(pow(targets[i].x - drone->drone_pos.x, 2) + pow(targets[i].y - drone->drone_pos.y, 2));
-
-        if (distance < TARGET_EFFECT_RADIUS)
+        float distance = sqrt(pow(targets[i].x - drone->drone_pos.x, 2) +
+                              pow(targets[i].y - drone->drone_pos.y, 2));
+        // If it's quite close but not too much then apply the force.
+        if (distance < config->EffectRadius.Target && distance > 1)
         {
-            float force = TARGET_FORCE_CONSTANT / distance;
-            float angle = atan2(targets[i].y - drone->drone_pos.y, targets[i].x - drone->drone_pos.x);
+            double x_distance = targets[i].x - drone->drone_pos.x;
+            double y_distance = targets[i].y - drone->drone_pos.y;
 
+            // Compute the magnitude of the repulsive force
+            double force =
+                -repulsive_force(distance, 10000, config->EffectRadius.Target,
+                                 drone->drone_vel.x, drone->drone_vel.y);
+
+            // Compute the direction of the repulsive force
+            double angle = atan2(y_distance, x_distance);
+
+            // Add the force to the accumulation variable
             drone->tar_force.x += cos(angle) * force;
             drone->tar_force.y += sin(angle) * force;
+
+            // Cap the force at a certain threshold.
+            if (drone->tar_force.x > config->Thresholds.MaxTargetForces)
+                drone->tar_force.x = config->Thresholds.MaxTargetForces;
+            if (drone->tar_force.x < -config->Thresholds.MaxTargetForces)
+                drone->tar_force.x = -config->Thresholds.MaxTargetForces;
+            if (drone->tar_force.y > config->Thresholds.MaxTargetForces)
+                drone->tar_force.y = config->Thresholds.MaxTargetForces;
+            if (drone->tar_force.y < -config->Thresholds.MaxTargetForces)
+                drone->tar_force.y = -config->Thresholds.MaxTargetForces;
         }
     }
 
@@ -227,36 +291,36 @@ void update_user_force(Drone *drone, char cmd)
     switch (cmd)
     {
     case 'q':
-        X_FORCE -= diag(FORCE_STEP);
-        Y_FORCE -= diag(FORCE_STEP);
+        X_FORCE -= diag(config->Forces.Step);
+        Y_FORCE -= diag(config->Forces.Step);
         break;
     case 'w':
-        Y_FORCE -= FORCE_STEP;
+        Y_FORCE -= config->Forces.Step;
         break;
     case 'e':
-        X_FORCE += diag(FORCE_STEP);
-        Y_FORCE -= diag(FORCE_STEP);
+        X_FORCE += diag(config->Forces.Step);
+        Y_FORCE -= diag(config->Forces.Step);
         break;
     case 'a':
-        X_FORCE -= FORCE_STEP;
+        X_FORCE -= config->Forces.Step;
         break;
     case 's':
         X_FORCE = slow_down();
         Y_FORCE = slow_down();
         break;
     case 'd':
-        X_FORCE += FORCE_STEP;
+        X_FORCE += config->Forces.Step;
         break;
     case 'z':
-        X_FORCE -= diag(FORCE_STEP);
-        Y_FORCE += diag(FORCE_STEP);
+        X_FORCE -= diag(config->Forces.Step);
+        Y_FORCE += diag(config->Forces.Step);
         break;
     case 'x':
-        Y_FORCE += FORCE_STEP;
+        Y_FORCE += config->Forces.Step;
         break;
     case 'c':
-        X_FORCE += diag(FORCE_STEP);
-        Y_FORCE += diag(FORCE_STEP);
+        X_FORCE += diag(config->Forces.Step);
+        Y_FORCE += diag(config->Forces.Step);
         break;
     case ' ':
         X_FORCE = slow_down();
@@ -265,10 +329,6 @@ void update_user_force(Drone *drone, char cmd)
     default:
         ret = false;
     }
-
-    // Clamp forces
-    X_FORCE = fminf(fmaxf(X_FORCE, -MAX_FORCE), MAX_FORCE);
-    Y_FORCE = fminf(fmaxf(Y_FORCE, -MAX_FORCE), MAX_FORCE);
 
     drone->user_force.x = X_FORCE;
     drone->user_force.y = Y_FORCE;
@@ -298,40 +358,53 @@ void calculate_total_force(Drone *drone)
 void update_position(Drone *drone, Grid *grid)
 {
     char log_msg[255];
+    float pos_x;
+    float pos_y;
     log_message(log_file, "updating position");
     // acquire_semaphore(sem_drone);
 
-    float pos_x = (drone->drone_force.x * INTEGRATION_INTERVAL * INTEGRATION_INTERVAL +
-                   (2 * MASS + VISCOUS_COEFFICIENT * INTEGRATION_INTERVAL) * drone->drone_pos_1.x -
-                   MASS * drone->drone_pos_2.x) /
-                  (MASS + VISCOUS_COEFFICIENT * INTEGRATION_INTERVAL);
-
-    float pos_y = (drone->drone_force.y * INTEGRATION_INTERVAL * INTEGRATION_INTERVAL +
-                   (2 * MASS + VISCOUS_COEFFICIENT * INTEGRATION_INTERVAL) * drone->drone_pos_1.y -
-                   MASS * drone->drone_pos_2.y) /
-                  (MASS + VISCOUS_COEFFICIENT * INTEGRATION_INTERVAL);
-
-    // Update position with clamping
-    if (pos_x > GRID_WIDTH)
+    if (drone->drone_vel.x < config->Thresholds.ZeroThreshold &&
+        drone->drone_vel.x > -config->Thresholds.ZeroThreshold &&
+        drone->drone_force.x == 0.0)
     {
-        pos_x = GRID_WIDTH - 1;
-        drone->drone_vel.x = 0.0f; // Reset velocity along X-axis
+        drone->drone_pos.x = drone->drone_pos_1.x;
     }
-    if (pos_x < 0)
+    else
     {
+        // Precompute constants to improve readability
+        float mass_term = config->Physics.Mass / (config->Physics.IntegrationInterval * config->Physics.IntegrationInterval);
+        float viscous_term = config->Physics.ViscousCoefficient / config->Physics.IntegrationInterval;
+        float denominator = mass_term + viscous_term;
+        float numerator = drone->drone_force.x - mass_term * (drone->drone_pos_2.x - 2 * drone->drone_pos_1.x) + viscous_term * drone->drone_pos_1.x;
+
+        pos_x = numerator / denominator;
+    }
+
+    if (drone->drone_vel.y < config->Thresholds.ZeroThreshold &&
+        drone->drone_vel.y > -config->Thresholds.ZeroThreshold &&
+        drone->drone_force.y == 0.0)
+    {
+        drone->drone_pos.y = drone->drone_pos_1.y;
+    }
+    else
+    {
+        // Precompute constants to improve readability
+        float mass_term = config->Physics.Mass / (config->Physics.IntegrationInterval * config->Physics.IntegrationInterval);
+        float viscous_term = config->Physics.ViscousCoefficient / config->Physics.IntegrationInterval;
+        float denominator = mass_term + viscous_term;
+        float numerator = drone->drone_force.y - mass_term * (drone->drone_pos_2.y - 2 * drone->drone_pos_1.y) + viscous_term * drone->drone_pos_1.y;
+
+        pos_y = numerator / denominator;
+    }
+
+    if (pos_x > config->Map.Size.Width)
+        pos_x = config->Map.Size.Width - 1;
+    else if (pos_x < 0)
         pos_x = 1;
-        drone->drone_vel.x = 0.0f;
-    }
-    if (pos_y > GRID_HEIGHT)
-    {
-        pos_y = GRID_HEIGHT - 1;
-        drone->drone_vel.y = 0.0f; // Reset velocity along Y-axis
-    }
-    if (pos_y < 0)
-    {
+    if (pos_y > config->Map.Size.Height)
+        pos_x = config->Map.Size.Height - 1;
+    else if (pos_y < 0)
         pos_y = 1;
-        drone->drone_vel.y = 0.0f;
-    }
 
     drone->drone_pos_2 = drone->drone_pos_1;
     drone->drone_pos_1 = drone->drone_pos;
@@ -341,10 +414,9 @@ void update_position(Drone *drone, Grid *grid)
     log_message(log_file, log_msg);
 
     // release_semaphore(sem_drone);
-
     // acquire_semaphore(sem_grid);
-    set_grid_point(grid, drone->drone_pos_1.x, drone->drone_pos_1.y, 0, FREE, log_file);
-    set_map_point(grid, drone, map, log_file);
+    set_grid_point(grid, FREE, log_file, config, drone->drone_pos_1.x, drone->drone_pos_1.y, 0);
+    set_grid_point(grid, DRONE, log_file, config, drone->drone_pos.x, drone->drone_pos.y, 254);
     // release_semaphore(sem_grid);
 
     log_message(log_file, "updated position of the drone in the grid!");
@@ -356,14 +428,14 @@ void update_velocity(Drone *drone)
     // acquire_semaphore(sem_drone);
     log_message(log_file, "updating velocities");
 
-    float dx_dt = (drone->drone_pos.x - drone->drone_pos_1.x) / INTEGRATION_INTERVAL;
-    float dy_dt = (drone->drone_pos.y - drone->drone_pos_1.y) / INTEGRATION_INTERVAL;
+    float dx_dt = (drone->drone_pos.x - drone->drone_pos_1.x) / config->Physics.IntegrationInterval;
+    float dy_dt = (drone->drone_pos.y - drone->drone_pos_1.y) / config->Physics.IntegrationInterval;
 
     snprintf(log_msg, sizeof(log_msg), "dx/dt = %.2f, dy/dt = %.2f", dx_dt, dy_dt);
     log_message(log_file, log_msg);
-    // Cap the velocity
-    drone->drone_vel.x = fminf(fmaxf(dx_dt, -MAX_VELOCITY), MAX_VELOCITY);
-    drone->drone_vel.y = fminf(fmaxf(dy_dt, -MAX_VELOCITY), MAX_VELOCITY);
+    // // Cap the velocity
+    // drone->drone_vel.x = fminf(fmaxf(dx_dt, -config->Thresholds.MaxVelocity), config->Thresholds.MaxVelocity);
+    // drone->drone_vel.y = fminf(fmaxf(dy_dt, -config->Thresholds.MaxVelocity), config->Thresholds.MaxVelocity);
 
     drone->drone_pos_1.x = drone->drone_pos.x;
     drone->drone_pos_1.y = drone->drone_pos.y;
@@ -446,8 +518,8 @@ void child1_task()
             input = '\0';
         }
 
-        // Optional sleep to prevent overloading
-        usleep(100000);
+        // sleep to prevent overloading
+        usleep(1000000 * config->Physics.IntegrationInterval);
     }
 }
 
@@ -459,58 +531,23 @@ void child2_task()
         {
             log_message(log_file, "Equations are processing!");
             char cmd = dequeue_cmd(drone);
-            // Stop command
-            if (cmd == 's')
-            {
-                // Reset forces
-                drone->obs_force.x = 0.0;
-                drone->obs_force.y = 0.0;
-
-                drone->tar_force.x = 0.0;
-                drone->tar_force.y = 0.0;
-
-                drone->user_force.x = 0.0;
-                drone->user_force.y = 0.0;
-
-                drone->wall_force.x = 0.0;
-                drone->wall_force.y = 0.0;
-
-                drone->drone_force.x = 0.0;
-                drone->drone_force.y = 0.0;
-
-                // Reset position
-                drone->drone_pos_1 = drone->drone_pos;
-                drone->drone_pos_2 = drone->drone_pos;
-
-                // Reset velocity
-                drone->drone_vel.x = 0.0;
-                drone->drone_vel.y = 0.0;
-
-                printf("All drone forces and velocity have been reset.\n");
-            }
-            else
-            {
-                // Update forces based on the grid's targets and obstacles
-                update_user_force(drone, cmd);
-                update_wall_force(drone);
-                update_obstacle_force(drone, grid->obstacles, grid->obstacle_count);
-                update_target_force(drone, grid->targets, grid->target_count);
-                calculate_total_force(drone);
-                // Update drone's state
-                update_position(drone, grid);
-                update_velocity(drone);
-            }
+            // Update forces based on the grid's targets and obstacles
+            update_user_force(drone, cmd);
+            update_wall_force(drone);
+            update_obstacle_force(drone, grid->obstacles, grid->obstacle_count);
+            update_target_force(drone, grid->targets, grid->target_count);
+            calculate_total_force(drone);
+            // Update drone's state
+            update_position(drone, grid);
+            update_velocity(drone);
 
             // Log state after processing
             char log_msg[256];
             snprintf(log_msg, sizeof(log_msg), "Processed input: '%c'", cmd);
             log_message(log_file, log_msg);
-
-            acquire_semaphore(sem_drone);
-            release_semaphore(sem_drone);
         }
 
-        // Optional sleep to prevent high CPU usage
-        usleep(100000);
+        // sleep to prevent high CPU usage
+        usleep(1000000 * config->Physics.IntegrationInterval);
     }
 }

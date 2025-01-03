@@ -9,7 +9,7 @@ int main()
 
     // Shared Resources Initialization
     setup_resources();
-
+    parent_pid = getpid();
     child1_pid = fork();
     if (child1_pid == 0)
     {

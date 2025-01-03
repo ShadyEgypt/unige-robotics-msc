@@ -2,21 +2,24 @@
 
 FILE *log_file = NULL;
 bool resources_exist = false;
-sem_t *g1 = NULL, *g2 = NULL, *g3 = NULL, *g4 = NULL;
+sem_t *grid_sem = NULL, *globals_sem = NULL, *drone_sem = NULL, *config_sem = NULL;
 ;
 int server_fd = -1, drone_fd = -1;
 
 Grid *grid = NULL;
 Globals *globals = NULL;
 Drone *drone = NULL;
-MapServerClient *map = NULL;
+Config *config = NULL;
 
+pid_t parent_pid = -1;
 pid_t child1_pid = -1;
 pid_t child2_pid = -1;
 pid_t child3_pid = -1;
+
 // Resource Setup
 void setup_resources()
 {
+    log_message(log_file, "Parent: create the semaphores!\n");
     int shm_grid_fd = create_shared_memory(SHM_GRID_NAME, SHM_GRID_SIZE);
     void *grid_addr = map_shared_memory(shm_grid_fd, SHM_GRID_SIZE);
     grid = (Grid *)grid_addr;
@@ -29,27 +32,106 @@ void setup_resources()
     void *drone_addr = map_shared_memory(shm_drone_fd, SHM_DRONE_SIZE);
     drone = (Drone *)drone_addr;
 
-    int shm_map_fd = create_shared_memory(SHM_MAP_NAME, SHM_MAP_SIZE);
-    void *map_addr = map_shared_memory(shm_map_fd, SHM_MAP_SIZE);
-    map = (MapServerClient *)map_addr;
+    int shm_config_fd = create_shared_memory(SHM_CONFIG_NAME, SHM_CONFIG_SIZE);
+    void *config_addr = map_shared_memory(shm_config_fd, SHM_CONFIG_SIZE);
+    config = (Config *)config_addr;
 
     // Semaphore creation
-    g1 = create_semaphore(SEM_GRID_NAME);
-    g2 = create_semaphore(SEM_G_NAME);
-    g3 = create_semaphore(SEM_DRONE_NAME);
-    g4 = create_semaphore(SEM_MAP_NAME);
+    grid_sem = create_semaphore(SEM_GRID_NAME);
+    globals_sem = create_semaphore(SEM_G_NAME);
+    drone_sem = create_semaphore(SEM_DRONE_NAME);
+    config_sem = create_semaphore(SEM_CONFIG_NAME);
+    log_message(log_file, "Parent: extract the parameters!\n");
 
-    create_fifo(SERVER_PIPE);
-    create_fifo(DRONE_PIPE);
-    grid->score = 0;
-    server_fd = open(SERVER_PIPE, O_RDONLY);
-    drone_fd = open(DRONE_PIPE, O_WRONLY);
+    FILE *file;
+    char jsonBuffer[MAX_FILE_SIZE];
 
-    if (server_fd == -1 || drone_fd == -1)
+    // Open JSON configuration file
+    file = fopen("appsettings.json", "r");
+    if (file == NULL)
     {
-        perror("Failed to open pipes");
-        exit(1);
+        perror("Error opening JSON file");
+        exit(EXIT_FAILURE);
     }
+
+    // Read JSON content
+    int len = fread(jsonBuffer, 1, sizeof(jsonBuffer), file);
+    fclose(file);
+
+    if (len == 0)
+    {
+        perror("Error reading JSON file");
+    }
+
+    // Parse JSON
+    cJSON *json = cJSON_Parse(jsonBuffer);
+    if (json == NULL)
+    {
+        perror("Error parsing JSON file");
+    }
+
+    // ✅ Parse Keyboard Configuration
+    cJSON *keyboard = cJSON_GetObjectItemCaseSensitive(json, "Keyboard");
+    cJSON *key = cJSON_GetObjectItemCaseSensitive(keyboard, "Key");
+    config->Keyboard.Key.Height = cJSON_GetObjectItemCaseSensitive(key, "Height")->valueint;
+    config->Keyboard.Key.Width = cJSON_GetObjectItemCaseSensitive(key, "Width")->valueint;
+
+    cJSON *box = cJSON_GetObjectItemCaseSensitive(keyboard, "Box");
+    config->Keyboard.Box.Height = cJSON_GetObjectItemCaseSensitive(box, "Height")->valueint;
+    config->Keyboard.Box.Width = cJSON_GetObjectItemCaseSensitive(box, "Width")->valueint;
+
+    // ✅ Parse Map Configuration
+    cJSON *map = cJSON_GetObjectItemCaseSensitive(json, "Map");
+    cJSON *size = cJSON_GetObjectItemCaseSensitive(map, "Size");
+    config->Map.Size.Height = cJSON_GetObjectItemCaseSensitive(size, "Height")->valueint;
+    config->Map.Size.Width = cJSON_GetObjectItemCaseSensitive(size, "Width")->valueint;
+    config->Map.Size.TotalSize = cJSON_GetObjectItemCaseSensitive(size, "TotalSize")->valueint;
+
+    cJSON *entities = cJSON_GetObjectItemCaseSensitive(map, "MaxEntities");
+    config->Map.MaxEntities.Targets = cJSON_GetObjectItemCaseSensitive(entities, "Targets")->valueint;
+    config->Map.MaxEntities.Obstacles = cJSON_GetObjectItemCaseSensitive(entities, "Obstacles")->valueint;
+
+    // ✅ Parse Physics Configuration
+    cJSON *physics = cJSON_GetObjectItemCaseSensitive(json, "Physics");
+    config->Physics.Mass = (float)cJSON_GetObjectItemCaseSensitive(physics, "Mass")->valuedouble;
+    config->Physics.ViscousCoefficient = (float)cJSON_GetObjectItemCaseSensitive(physics, "ViscousCoefficient")->valuedouble;
+    config->Physics.IntegrationInterval = (float)cJSON_GetObjectItemCaseSensitive(physics, "IntegrationInterval")->valuedouble;
+
+    // ✅ Parse Forces Configuration
+    cJSON *forces = cJSON_GetObjectItemCaseSensitive(json, "Forces");
+    config->Forces.Step = (float)cJSON_GetObjectItemCaseSensitive(forces, "Step")->valuedouble;
+    config->Forces.Total = (float)cJSON_GetObjectItemCaseSensitive(forces, "Total")->valuedouble;
+    config->Forces.Target = (float)cJSON_GetObjectItemCaseSensitive(forces, "Target")->valuedouble;
+    config->Forces.Obstacle = (float)cJSON_GetObjectItemCaseSensitive(forces, "Obstacle")->valuedouble;
+    config->Forces.Wall = (float)cJSON_GetObjectItemCaseSensitive(forces, "Wall")->valuedouble;
+
+    // ✅ Parse Effect Radius Configuration
+    cJSON *effectRadius = cJSON_GetObjectItemCaseSensitive(json, "EffectRadius");
+    config->EffectRadius.Obstacle = (float)cJSON_GetObjectItemCaseSensitive(effectRadius, "Obstacle")->valuedouble;
+    config->EffectRadius.Target = (float)cJSON_GetObjectItemCaseSensitive(effectRadius, "Target")->valuedouble;
+    config->EffectRadius.Wall = (float)cJSON_GetObjectItemCaseSensitive(effectRadius, "Wall")->valuedouble;
+
+    // ✅ Parse Thresholds Configuration
+    cJSON *thresholds = cJSON_GetObjectItemCaseSensitive(json, "Thresholds");
+    config->Thresholds.MinDistance = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MinDistance")->valuedouble;
+    config->Thresholds.MinWallDistance = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MinWallDistance")->valuedouble;
+    config->Thresholds.ZeroThreshold = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "ZeroThreshold")->valuedouble;
+    config->Thresholds.MaxVelocity = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MaxVelocity")->valuedouble;
+    config->Thresholds.MaxObstacleForces = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MaxObstacleForces")->valuedouble;
+    config->Thresholds.MaxTargetForces = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MaxTargetForces")->valuedouble;
+    config->Thresholds.MaxWallForce = (float)cJSON_GetObjectItemCaseSensitive(thresholds, "MaxWallForce")->valuedouble;
+
+    // ✅ Parse Pipes Configuration
+    cJSON *pipes = cJSON_GetObjectItemCaseSensitive(json, "Pipes");
+    strcpy(config->Pipes.KeyboardPipe, cJSON_GetObjectItemCaseSensitive(pipes, "KeyboardPipe")->valuestring);
+    strcpy(config->Pipes.ServerPipe, cJSON_GetObjectItemCaseSensitive(pipes, "ServerPipe")->valuestring);
+    strcpy(config->Pipes.DronePipe, cJSON_GetObjectItemCaseSensitive(pipes, "DronePipe")->valuestring);
+    printf("extracted pipes!\n");
+    printf("server pipe extracted %s\n", config->Pipes.ServerPipe);
+    create_fifo(config->Pipes.ServerPipe);
+    create_fifo(config->Pipes.DronePipe);
+    grid->score = 0;
+
     printf("Parent: All resources are created successfully.\n");
     resources_exist = true;
 }
@@ -57,21 +139,33 @@ void setup_resources()
 // Resource Cleanup
 void cleanup_resources()
 {
-    if (resources_exist)
+    if (getpid() == parent_pid)
     {
-        destroy_shared_memory(SHM_GRID_NAME);
-        destroy_shared_memory(SHM_G_NAME);
-        destroy_shared_memory(SHM_DRONE_NAME);
-        printf("Shared memory detached and destroyed.\n");
+        if (server_fd)
+        {
+            close(server_fd);
+            unlink(config->Pipes.ServerPipe);
+        }
+        if (drone_fd)
+        {
+            close(drone_fd);
+            unlink(config->Pipes.DronePipe);
+        }
+        if (resources_exist)
+        {
+            destroy_shared_memory(SHM_GRID_NAME);
+            destroy_shared_memory(SHM_G_NAME);
+            destroy_shared_memory(SHM_DRONE_NAME);
+            destroy_shared_memory(SHM_CONFIG_NAME);
+            printf("Shared memory detached and destroyed.\n");
+        }
+        destroy_semaphore(SEM_GRID_NAME, grid_sem);
+        destroy_semaphore(SEM_G_NAME, globals_sem);
+        destroy_semaphore(SEM_DRONE_NAME, drone_sem);
+        destroy_semaphore(SEM_CONFIG_NAME, config_sem);
+
+        printf("Resources cleaned up successfully.\n");
     }
-    destroy_semaphore(SEM_GRID_NAME, g1);
-    destroy_semaphore(SEM_G_NAME, g2);
-    destroy_semaphore(SEM_DRONE_NAME, g3);
-    close(server_fd);
-    close(drone_fd);
-    unlink(SERVER_PIPE);
-    unlink(DRONE_PIPE);
-    printf("Resources cleaned up successfully.\n");
 }
 
 // Signal handler for graceful cleanup
@@ -115,7 +209,6 @@ void handle_sigint(int sig)
     kill(globals->obstacles_pid, SIGINT);
     kill(globals->targets_pid, SIGINT);
     kill(globals->drone_pid, SIGINT);
-
     printf("All child processes terminated, resources cleaned up. Exiting.\n");
     exit(0);
 }
@@ -124,14 +217,11 @@ void child1_task()
 {
     printf("Child 1: Initializing Grid and Globals\n");
 
-    memset(grid->grid, 0, sizeof(grid->grid));
-    set_grid_point(grid, 1, 1, 254, DRONE, log_file);
-
-    printf("Child 1: set Grid\n");
+    printf("Child 1: set server pid\n");
 
     globals->server_pid = getpid();
 
-    printf("Child 1: set Globals\n");
+    printf("Child 1: set Drone\n");
 
     drone->drone_force = (struct force){0, 0};
     drone->user_force = (struct force){0, 0};
@@ -141,14 +231,27 @@ void child1_task()
     drone->drone_vel = (struct vel){0, 0};
     drone->drone_pos = (struct pos){0, 0};
 
-    printf("Child 1: set Drone\n");
-
+    printf("Child 1: set Grid\n");
+    // Create the grid dynamically using parameters
+    Grid *grid = create_grid();
+    grid->score = 0;
+    grid->target_count = 0;
+    grid->obstacle_count = 0;
+    grid->drone_pos.x = 1;
+    grid->drone_pos.y = 1;
     printf("Child 1: Initialization complete\n");
 }
 
 void child2_task()
 {
     printf("Child 2: Reading from FIFO\n");
+    server_fd = open(config->Pipes.ServerPipe, O_RDONLY);
+    drone_fd = open(config->Pipes.DronePipe, O_WRONLY);
+
+    if (server_fd == -1 || drone_fd == -1)
+    {
+        perror("Failed to open pipes");
+    }
     char input;
 
     while (1)
@@ -175,7 +278,7 @@ void child3_task()
         printf("Child 3: Waiting for PIDs...\n");
         printf("Child 3: display_pid: %d, drone_pid: %d\n",
                globals->display_pid, globals->drone_pid);
-        sleep(10000);
+        sleep(2);
     }
 
     while (!globals->targets_pid || !globals->obstacles_pid || !globals->map_pid)
@@ -193,7 +296,7 @@ void child3_task()
         kill(globals->obstacles_pid, SIGUSR1);
 
         printf("Child 3: Grid reset, sleeping...\n");
-        sleep(120);
+        sleep(20);
     }
 }
 
@@ -209,9 +312,9 @@ int create_fifo(const char *fifo_path)
 
 void clear_grid_except_254(Grid *grid)
 {
-    for (int i = 0; i < GRID_WIDTH; i++)
+    for (int i = 0; i < config->Map.Size.Width; i++)
     {
-        for (int j = 0; j < GRID_HEIGHT; j++)
+        for (int j = 0; j < config->Map.Size.Height; j++)
         {
             // If the point is not 254, set it to 0
             if (grid->grid[i][j] != 254)
@@ -220,4 +323,83 @@ void clear_grid_except_254(Grid *grid)
             }
         }
     }
+}
+
+// Example dynamic grid allocation functions
+Grid *create_grid()
+{
+    Grid *grid = malloc(sizeof(Grid));
+    if (!grid)
+    {
+        perror("Failed to allocate memory for Grid struct");
+        exit(EXIT_FAILURE);
+    }
+    int height = config->Map.Size.Height;
+    int width = config->Map.Size.Width;
+    grid->grid_actual_height = 0;
+    grid->grid_actual_width = 0;
+
+    // Allocate memory for grid
+    grid->grid = malloc(height * sizeof(int *));
+    if (!grid->grid)
+    {
+        perror("Failed to allocate memory for grid rows");
+        free(grid);
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        grid->grid[i] = malloc(width * sizeof(int));
+        if (!grid->grid[i])
+        {
+            perror("Failed to allocate memory for grid columns");
+            for (int j = 0; j < i; j++)
+            {
+                free(grid->grid[j]);
+            }
+            free(grid->grid);
+            free(grid);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Allocate targets and obstacles
+    grid->targets = malloc(config->Map.MaxEntities.Targets * sizeof(Target));
+    grid->obstacles = malloc(config->Map.MaxEntities.Obstacles * sizeof(Obstacle));
+
+    if (!grid->targets || !grid->obstacles)
+    {
+        perror("Failed to allocate memory for targets or obstacles");
+        free_grid(grid);
+        exit(EXIT_FAILURE);
+    }
+
+    // Initialize grid to zero
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            grid->grid[i][j] = 0;
+        }
+    }
+
+    printf("Grid initialized successfully: %d x %d\n", height, width);
+    return grid;
+}
+
+void free_grid(Grid *grid)
+{
+    if (!grid)
+        return;
+
+    for (int i = 0; i < grid->grid_actual_height; i++)
+    {
+        free(grid->grid[i]);
+    }
+    free(grid->grid);
+    free(grid->targets);
+    free(grid->obstacles);
+    free(grid);
+    printf("Grid memory freed successfully.\n");
 }
