@@ -1,0 +1,46 @@
+\section{Details}
+In this implementation, the Naive Bayes classifier was built from scratch without relying on pre-built classifiers from libraries such as Scikit-learn. The classifier calculates the posterior probability of a class given a set of features using Bayes' Theorem, expressed mathematically as:
+\[
+P(C|X) = \frac{P(X|C)P(C)}{P(X)}
+\]
+
+Where:
+\begin{itemize}
+    \item \(P(C|X)\) represents the "posterior probability" of class \(C\) given the feature set \(X\).
+    \item \(P(X|C)\) represents the "likelihood", the probability of observing the feature set \(X\) given that class \(C\) is true.
+    \item \(P(C)\) represents the "prior probability" of class \(C\).
+    \item \(P(X)\) represents the "marginal probability" of observing the feature set \(X\), acting as a normalizing factor.
+\end{itemize}
+
+In the training phase, prior probabilities are calculated by dividing the number of instances of each class by the total number of training instances. The likelihoods are estimated by counting the occurrences of each feature value within a given class and normalizing it by the total number of instances. In the prediction phase, the classifier computes the posterior probability for each class by multiplying the prior probability by the observed likelihoods.
+
+The Laplace smoothing formula is given by:
+
+\[
+P(X|C) = \frac{n + a}{N + a \times v}
+\]
+
+Where:
+\begin{itemize}
+    \item \(n\) denotes the number of units of a certain feature value associated with a class.
+    \item \(a\) represents the "smoothing parameter".
+    \item \(N\) represents the "total count of instances" for a class.
+    \item \(v\) represents the "number of unique possible values" for the feature.
+\end{itemize}
+
+This formula ensures that even unseen feature values during training are assigned a non-zero probability, preventing computational errors.
+
+\paragraph{Training Phase}
+- "Prior Probabilities:" Calculated as the ratio of the number of occurrences of each class to the total training samples.
+- "Likelihood Estimation:" For each feature, conditional probabilities are calculated for all unique feature values given each class.
+- "Laplace Smoothing:" Applied to handle zero probabilities by adjusting likelihood calculations.
+
+\paragraph{Prediction Phase}
+For each test instance:
+1. The "posterior probability" for each class is calculated using the Bayes' Theorem formula.
+2. If a feature value is absent in the training dataset, Laplace smoothing ensures a valid probability.
+3. The "class with the highest posterior probability" is selected as the predicted class.
+
+This approach adheres to the mathematical foundations of the Naive Bayes algorithm and ensures robustness in handling unseen attribute values. 
+
+Finally, the class with the highest posterior probability is selected as the predicted class for the given observation.
