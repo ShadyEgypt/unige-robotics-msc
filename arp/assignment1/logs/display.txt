@@ -1,0 +1,6 @@
+[Tue Dec 31 15:59:47 2024] program started!
+[Tue Dec 31 15:59:47 2024] ncurses initialized!
+[Tue Dec 31 15:59:47 2024] shared memories got attached!
+[Tue Dec 31 15:59:47 2024] wrote my pid in the shared memory globals!
+[Tue Dec 31 15:59:47 2024] opened fd in write mode!
+[Tue Dec 31 16:02:55 2024] Input 'p' written to the pipe

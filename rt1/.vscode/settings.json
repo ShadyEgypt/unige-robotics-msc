@@ -70,5 +70,6 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "*.ipp": "cpp"
-    }
+    },
+    "ros.distro": "humble"
 }

@@ -1,0 +1,5 @@
+[Tue Dec 31 15:59:44 2024] program started!
+[Tue Dec 31 15:59:44 2024] Parent: create the semaphores!
+
+[Tue Dec 31 15:59:44 2024] Parent: extract the parameters!
+

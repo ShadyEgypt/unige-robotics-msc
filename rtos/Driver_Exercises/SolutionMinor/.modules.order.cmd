@@ -1,1 +1,0 @@
-savedcmd_/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/modules.order := {   echo /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/simple.o; :; } > /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/modules.order
