@@ -1,1 +1,0 @@
-savedcmd_/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/Module.symvers :=  scripts/mod/modpost -M -m -a      -o /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/Module.symvers -T /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/SolutionMinor/modules.order -i Module.symvers -e 

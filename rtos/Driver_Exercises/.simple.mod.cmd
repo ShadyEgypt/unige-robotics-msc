@@ -1,1 +1,0 @@
-savedcmd_/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/simple.mod := printf '%s\n'   simple.o | awk '!x[$$0]++ { print("/home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/"$$0) }' > /home/shady/Documents/unige-robotics-msc/rtos/Driver_Exercises/simple.mod
