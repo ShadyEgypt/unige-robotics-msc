@@ -1,4 +1,6 @@
 <launch>
+    <include file="$(find assignment_2_2024)/launch/assignment1.launch" />
+
     <!-- Action Client Node -->
     <node pkg="assignment2_p1" type="action_client_node.py" name="action_client" output="screen" />
 

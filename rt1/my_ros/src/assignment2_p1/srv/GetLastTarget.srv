@@ -1,3 +1,9 @@
----
+# Request part
+bool set_target    # If true, set the last target; if false, get the last target
 float64 x
 float64 y
+---
+# Response part
+float64 res_x
+float64 res_y
+bool success       # True if operation was successful
