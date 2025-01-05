@@ -8,7 +8,6 @@ from assignment2_p1.msg import RobotStatus
 from geometry_msgs.msg import Twist
 from assignment2_p1.srv import GetLastTarget, GetLastTargetResponse
 
-last_target = {'x': 0.0, 'y': 0.0}
 current_feedback = {'x': 0.0, 'y': 0.0, 'status': ""}
 
 def odom_callback(msg):
@@ -26,14 +25,12 @@ def odom_callback(msg):
     status_pub.publish(status_msg)
 
 def send_goal(x, y):
-    global client, last_target
+    global client
     goal = PlanningGoal()
     goal.target_pose.pose.position.x = x
     goal.target_pose.pose.position.y = y
     client.send_goal(goal, done_cb=goal_done_callback, feedback_cb=goal_feedback_callback)
     set_last_target(x, y)
-    last_target['x'] = x
-    last_target['y'] = y
     rospy.loginfo(f"Sent goal: x={x}, y={y}")
 
 def goal_done_callback(status, result):
