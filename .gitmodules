@@ -1,0 +1,3 @@
+[submodule "rt1/my_ros/src/rt1_assignment2_p1"]
+	path = rt1/my_ros/src/rt1_assignment2_p1
+	url = https://github.com/ShadyEgypt/rt1_assignment2_p1.git
